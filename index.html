@@ -1,0 +1,2888 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent analysis of Macquarie Group FY2026 audited financial statements and notes.">
+  <title>Macquarie Group FY2026 Financial Analysis</title>
+  <style>
+    /* === EMBEDDED TYPOGRAPHY === */
+    @font-face {
+      font-family: "Report Sans";
+      src: url('fonts/report-sans-300-600.ttf') format("truetype");
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Report Sans";
+      src: url('fonts/report-sans-700-900.ttf') format("truetype");
+      font-style: normal;
+      font-weight: 700 900;
+      font-display: swap;
+    }
+
+    /* === THEME === */
+    :root {
+      --stage-bg: #080b09;
+      --slide-bg: #ffffff;
+      --ink: #080b09;
+      --ink-soft: #303632;
+      --muted: #68716b;
+      --rule: #d7ddd9;
+      --mint: #00805e;
+      --mint-deep: #006b4d;
+      --mint-pale: #d9f2ea;
+      --mint-faint: #f0faf6;
+      --negative: #b43a32;
+      --negative-pale: #faece9;
+      --negative-faint: #fff6f4;
+      --font: "Report Sans", sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --title-size: 48px;
+      --metric-size: 46px;
+      --body-size: 17px;
+      --small-size: 13px;
+    }
+
+    /* === RESET === */
+    * { box-sizing: border-box; }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+
+    /* 1. Lock the browser viewport */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 2. Full-window deck viewport */
+    .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 3. Fixed 16:9 design canvas.
+       JavaScript sets transform: translate(...) scale(...). */
+    .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: var(--slide-bg, #fff);
+    }
+
+    /* 4. Slides stack inside the fixed stage.
+       Content must be laid out at 1920×1080, not reflowed per device. */
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+    }
+
+    /* 5. Keep media inside authored slide bounds */
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* 6. Print one fixed-size slide per page */
+    @media print {
+        html,
+        body {
+            width: 1920px;
+            height: auto;
+            overflow: visible;
+            background: #fff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .deck-viewport {
+            position: static;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-stage {
+            position: static;
+            width: auto;
+            height: auto;
+            transform: none !important;
+            background: none;
+        }
+
+        .slide {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            width: 1920px;
+            height: 1080px;
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .slide:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+    }
+
+    /* 7. Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-delay: 0ms !important;
+            transition-duration: 0.01ms !important;
+            transition-delay: 0ms !important;
+        }
+    }
+
+    /* === SLIDE FOUNDATION === */
+    body { font-family: var(--font); color: var(--ink); }
+    .slide {
+      padding: 64px 88px 58px;
+      background:
+        linear-gradient(90deg, transparent 0 87px, rgba(0,166,125,.08) 88px, transparent 89px),
+        #fff;
+    }
+    .slide::after {
+      content: attr(data-slide);
+      position: absolute;
+      right: 88px;
+      top: 73px;
+      color: var(--muted);
+      font-size: 17px;
+      letter-spacing: .1em;
+    }
+    .slide-header {
+      height: 110px;
+      border-top: 2px solid var(--rule);
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 36px;
+      align-items: start;
+    }
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      top: 64px;
+      left: 88px;
+      width: 230px;
+      height: 2px;
+      background: var(--mint);
+    }
+    .kicker {
+      color: var(--mint-deep);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h2 {
+      font-size: var(--title-size);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      font-weight: 700;
+    }
+    .slide.long-title h2 {
+      font-size: var(--title-size);
+      white-space: nowrap;
+    }
+    h3 {
+      font-size: 27px;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      font-weight: 700;
+    }
+    .slide-body {
+      position: relative;
+      height: 790px;
+      padding-top: 24px;
+    }
+    .slide-footer {
+      position: absolute;
+      left: 88px;
+      right: 88px;
+      bottom: 30px;
+      min-height: 40px;
+      border-top: 1px solid var(--rule);
+      padding-top: 13px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .source-line { max-width: 570px; }
+    .slide-menu {
+      position: absolute;
+      top: 64px;
+      right: 88px;
+      z-index: 30;
+      display: flex;
+      align-items: stretch;
+      border: 1px solid var(--ink);
+      background: white;
+    }
+    .title-slide .slide-menu { top: 94px; right: 120px; }
+    .has-slide-menu::after { display: none; }
+    .slide-menu-toggle {
+      min-width: 124px;
+      border: 0;
+      border-right: 1px solid var(--rule);
+      background: white;
+      color: var(--ink);
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font: 700 14px/1 var(--font);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .slide-menu-toggle::after {
+      content: "⌄";
+      font-size: 18px;
+      line-height: .7;
+      transform-origin: center;
+      transition: transform .2s var(--ease);
+    }
+    .slide-menu-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 86px;
+      padding: 0 14px;
+      color: var(--muted);
+      font: 700 14px/1 var(--font);
+      letter-spacing: .08em;
+    }
+    .slide-menu.open .slide-menu-toggle { background: var(--mint); color: var(--ink); }
+    .slide-menu.open .slide-menu-toggle::after { transform: rotate(180deg); }
+    .slide-menu-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 330px;
+      padding: 11px 12px;
+      border: 1px solid var(--ink);
+      background: rgba(240, 250, 246, .98);
+      box-shadow: 0 14px 30px rgba(8, 11, 9, .16);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    }
+    .slide-menu.open .slide-menu-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+    }
+    .slide-menu-section + .slide-menu-section {
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+    }
+    .slide-menu-section-label {
+      padding: 0 12px 5px;
+      color: var(--mint-deep);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .slide-menu-item,
+    .slide-menu .evidence-button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 9px 12px 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .slide-menu-item-title {
+      display: block;
+      font: 700 14px/1.15 var(--font);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .slide-menu-item-description {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+    .slide-menu-item:hover,
+    .slide-menu-item:focus-visible,
+    .slide-menu .evidence-button:hover,
+    .slide-menu .evidence-button:focus-visible { background: var(--mint); color: var(--ink); }
+    .slide-menu-item:hover .slide-menu-item-description,
+    .slide-menu-item:focus-visible .slide-menu-item-description,
+    .slide-menu .evidence-button:hover .slide-menu-item-description,
+    .slide-menu .evidence-button:focus-visible .slide-menu-item-description { color: var(--ink); }
+
+    /* === REVEAL MOTION === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .38s var(--ease), transform .38s var(--ease);
+    }
+    .slide.visible .reveal { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .06s; }
+    .reveal.d2 { transition-delay: .12s; }
+    .reveal.d3 { transition-delay: .18s; }
+    .reveal.d4 { transition-delay: .24s; }
+
+    /* === REUSABLE LAYOUTS === */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .panel {
+      border: 1px solid var(--rule);
+      padding: 28px 30px;
+      background: var(--mint-faint);
+      border-radius: 3px;
+    }
+    .panel.mint,
+    .panel.increase,
+    .panel.asset { background: var(--mint-pale); border-color: var(--mint-pale); }
+    .panel.decrease { background: var(--negative-pale); border-color: #f5ded9; }
+    .panel.decrease .label { color: var(--negative); }
+    .panel.black { background: var(--ink); color: white; border-color: var(--ink); }
+    .panel.soft { background: var(--mint-pale); border-color: var(--mint-pale); }
+    .panel .label,
+    .income-card .label {
+      color: var(--mint-deep);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+    }
+    .panel.black .label { color: var(--mint); }
+    .income-card:nth-child(3) .label { color: var(--mint); }
+    .panel .big {
+      margin-top: 12px;
+      font-size: var(--metric-size);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .panel .sub {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: var(--body-size);
+      line-height: 1.35;
+    }
+    .panel.black .sub { color: #d8ddda; }
+    .insight-box {
+      background: var(--ink);
+      color: white;
+      padding: 28px 34px;
+      font-size: 24px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .insight-box strong { color: var(--mint); }
+    .commentary {
+      border-left: 5px solid var(--mint);
+      padding: 13px 0 13px 21px;
+      font-size: 19px;
+      line-height: 1.42;
+      color: var(--ink-soft);
+    }
+    .commentary b {
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: 14px;
+    }
+    .slide-body .commentary b {
+      color: var(--ink) !important;
+    }
+    .micro {
+      font-size: var(--small-size);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .positive { color: var(--mint-deep); }
+    .negative { color: var(--negative); }
+    .metric-value { white-space: nowrap; }
+    .metric-name { font-size: 16px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .delta { font-weight: 700; }
+    .bullet-list { margin: 14px 0 0; padding-left: 23px; }
+    .bullet-list li { margin: 10px 0; font-size: 19px; line-height: 1.35; }
+    .compact-list { margin: 12px 0 0; padding-left: 21px; }
+    .compact-list li { margin: 8px 0; font-size: 17px; line-height: 1.32; }
+
+    /* === TITLE SLIDE === */
+    .title-slide {
+      padding: 0;
+      background: white;
+    }
+    .title-slide::after { content: "01 / 10"; top: 95px; right: 120px; }
+    .title-stage {
+      position: absolute;
+      inset: 0;
+      padding: 72px 120px 68px;
+    }
+    .title-rule {
+      height: 2px;
+      background: linear-gradient(90deg, var(--mint) 0 230px, var(--rule) 230px);
+    }
+    .title-main {
+      width: 1580px;
+      margin-top: 96px;
+      font-size: 104px;
+      line-height: .98;
+      font-weight: 700;
+      letter-spacing: -.045em;
+    }
+    .title-main span {
+      display: block;
+      max-width: 1500px;
+      margin-top: 16px;
+      color: var(--mint);
+      font-size: 82px;
+      line-height: 1.02;
+    }
+    .title-author {
+      margin-top: 34px;
+      display: flex;
+      gap: 28px;
+      align-items: baseline;
+      color: var(--ink-soft);
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+    .title-author a {
+      color: var(--mint-deep);
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+    .title-question {
+      position: absolute;
+      left: 120px;
+      right: 120px;
+      bottom: 94px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 42px;
+      align-items: start;
+      padding: 0 0 0 32px;
+      border-left: 6px solid var(--mint);
+      color: var(--ink-soft);
+    }
+    .title-question .label {
+      color: var(--mint-deep);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .title-question p {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    /* === SLIDE 2: FINANCIAL HIGHLIGHTS === */
+    .s2-dashboard {
+      height: 742px;
+    }
+    .s2-hero-card {
+      width: calc((100% - 40px) / 3);
+      min-height: 0;
+      padding: 24px 28px;
+      background: var(--mint-deep);
+      color: white;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+    .s2-hero-card .label {
+      color: #dff5ee;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .s2-hero-card .value {
+      margin-top: 8px;
+      font-size: 70px;
+      line-height: .9;
+      font-weight: 700;
+      letter-spacing: -.05em;
+    }
+    .s2-hero-card .sub {
+      color: #dff5ee;
+      font-size: 18px;
+      line-height: 1.2;
+      text-align: left;
+    }
+    .s2-hero-card .positive {
+      color: white;
+    }
+    .s2-metric-groups {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.42fr;
+      gap: 20px;
+      min-height: 0;
+    }
+    .s2-metric-group {
+      min-height: 0;
+      padding: 16px;
+      border: 1px solid var(--rule);
+      background: white;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+    }
+    .s2-group-heading {
+      color: var(--mint-deep);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .s2-group-grid {
+      min-height: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .s2-group-grid.income { grid-template-rows: repeat(3, 1fr); }
+    .s2-group-grid.balance { grid-template-rows: repeat(3, 1fr); }
+    .s2-group-grid.rest {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+    .s2-highlight-card {
+      min-height: 0;
+      padding: 16px 18px 14px;
+      background: var(--mint-faint);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .s2-highlight-card.priority {
+      background: var(--mint-deep);
+    }
+    .s2-highlight-card.priority .label,
+    .s2-highlight-card.priority .value,
+    .s2-highlight-card.priority .sub,
+    .s2-highlight-card.priority .positive {
+      color: white;
+    }
+    .s2-highlight-card.priority .label {
+      font-size: 19px;
+    }
+    .s2-highlight-card.priority .value {
+      font-size: 48px;
+    }
+    .s2-highlight-card.priority .sub {
+      font-size: 16px;
+    }
+    .s2-highlight-card.expense {
+      background: var(--negative-faint);
+    }
+    .s2-highlight-card.unfavourable {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .s2-highlight-card.expense .label,
+    .s2-highlight-card.expense .sub,
+    .s2-highlight-card.unfavourable .label,
+    .s2-highlight-card.unfavourable .sub {
+      color: var(--negative);
+    }
+    .s2-highlight-card.expense .positive,
+    .s2-highlight-card.unfavourable .positive {
+      color: var(--negative);
+    }
+    .s2-highlight-card .label {
+      color: var(--mint-deep);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .s2-highlight-card .value {
+      margin-top: 9px;
+      color: var(--ink);
+      font-size: 38px;
+      line-height: .92;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .s2-highlight-card .sub {
+      color: var(--mint-deep);
+      font-size: 15px;
+      line-height: 1.22;
+    }
+    .s2-highlight-card .sub.negative {
+      color: var(--negative);
+    }
+    .s2-highlight-card .sub.muted {
+      color: var(--ink-soft);
+    }
+
+    /* === SLIDE 3: BRIDGE === */
+    .bridge-wrap {
+      border: 1px solid var(--rule);
+      padding: 20px 22px 10px;
+      height: 510px;
+    }
+    #profitBridge { width: 100%; height: 470px; overflow: visible; }
+    .bridge-notes {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .bridge-notes .panel {
+      height: 250px;
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bridge-notes .net-profit-card {
+      background: #050505;
+      border-color: #050505;
+    }
+    .bridge-notes .net-profit-card .label,
+    .bridge-notes .net-profit-card .big,
+    .bridge-notes .net-profit-card .positive {
+      color: white;
+    }
+
+    /* === SLIDE 4: SEGMENTS === */
+    .segment-layout {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
+      height: 735px;
+    }
+    .segment-chart {
+      height: 735px;
+      border: 1px solid var(--rule);
+      padding: 34px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .segment-row {
+      display: grid;
+      grid-template-columns: 285px 1fr 150px;
+      gap: 18px;
+      align-items: center;
+      min-height: 124px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .segment-row:last-child { border-bottom: 0; }
+    .segment-name { font-size: 18px; font-weight: 700; }
+    .bar-track { position: relative; height: 31px; background: #edf1ee; }
+    .bar-fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--mint); }
+    .bar-fill.negative { left: auto; right: 0; background: var(--negative); }
+    .segment-value { text-align: right; font-size: 18px; }
+    .driver-stack {
+      height: 735px;
+      display: grid;
+      grid-template-rows: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .driver-card {
+      min-height: 0;
+      padding: 17px 20px;
+      background: var(--mint-faint);
+      border-left: 5px solid var(--mint);
+    }
+    .driver-card strong { font-size: 18px; }
+    .driver-card p { margin-top: 7px; color: var(--ink-soft); font-size: 15px; line-height: 1.3; }
+
+    /* === SLIDE 5: INCOME === */
+    .income-review {
+      height: 735px;
+      display: grid;
+      grid-template-rows: 128px 1fr;
+      gap: 18px;
+    }
+    .income-summary-card {
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-pale);
+      padding: 22px 26px;
+      display: grid;
+      grid-template-columns: 300px 210px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .income-summary-card .label {
+      color: var(--mint-deep);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+    }
+    .income-summary-card .big {
+      margin-top: 8px;
+      font-size: 40px;
+      line-height: .95;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .income-summary-card .change {
+      color: var(--mint-deep);
+      font-size: 26px;
+      font-weight: 700;
+    }
+    .income-summary-card p {
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+    .income-driver-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 18px;
+      min-height: 0;
+    }
+    .income-card {
+      border: 1px solid var(--mint-pale);
+      padding: 18px 20px;
+      background: var(--mint-faint);
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .income-card.offset {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .income-card .income-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .income-card .label {
+      color: var(--mint-deep);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      line-height: 1.15;
+    }
+    .income-card.offset .label { color: var(--negative); }
+    .income-card .income-value {
+      margin-top: 8px;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .income-card .movement {
+      padding-top: 3px;
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .income-card .fy25 {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .income-card .commentary {
+      margin-top: 13px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.32;
+    }
+    .income-card .commentary b {
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    /* === SLIDE 6: COSTS === */
+    .expense-review {
+      height: 760px;
+      display: grid;
+      grid-template-rows: 112px 1fr 205px;
+      gap: 14px;
+    }
+    .expense-summary-card {
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-pale);
+      padding: 20px 26px;
+      display: grid;
+      grid-template-columns: 300px 190px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .expense-summary-card.unfavourable {
+      background: #f7e1da;
+      border-color: #f5ded9;
+    }
+    .expense-summary-card.unfavourable .label,
+    .expense-summary-card.unfavourable .positive,
+    .expense-summary-card.unfavourable .change {
+      color: var(--negative);
+    }
+    .expense-summary-card .label,
+    .expense-card .label {
+      color: var(--mint-deep);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      line-height: 1.15;
+    }
+    .expense-summary-card .big {
+      margin-top: 7px;
+      font-size: 38px;
+      line-height: .95;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .expense-summary-card .change {
+      color: var(--mint-deep);
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .expense-summary-card p {
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.32;
+    }
+    .expense-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 18px;
+      min-height: 0;
+    }
+    .expense-card {
+      min-height: 0;
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-faint);
+      padding: 17px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .expense-card.decrease {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .expense-card.unfavourable {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .expense-card.unfavourable .label,
+    .expense-card.unfavourable .positive,
+    .expense-card.unfavourable .movement {
+      color: var(--negative);
+    }
+    .expense-card .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .expense-card .value {
+      margin-top: 8px;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .expense-card .movement {
+      padding-top: 3px;
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .expense-card .fy25 {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .expense-card .commentary {
+      margin-top: 12px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.32;
+    }
+    .tax-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .tax-section .expense-card {
+      padding: 21px 24px;
+    }
+
+    /* === SLIDE 7: BALANCE SHEET === */
+    .balance-position {
+      height: 760px;
+      display: grid;
+      grid-template-rows: 430px 1fr;
+      gap: 18px;
+    }
+    .balance-layout { height: 430px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .movement-list {
+      height: 430px;
+      border: 1px solid var(--mint-pale);
+      padding: 22px 24px;
+      background: var(--mint-faint);
+    }
+    .movement-list.liability {
+      border-color: var(--mint-pale);
+      background: var(--mint-faint);
+    }
+    .movement-list h3 {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: baseline;
+    }
+    .movement-list h3 .movement-total {
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .movement-row {
+      display: grid;
+      grid-template-columns: 265px 1fr 120px;
+      gap: 16px;
+      align-items: center;
+      min-height: 62px;
+      border-bottom: 1px solid #edf0ee;
+    }
+    .movement-row:last-child { border-bottom: 0; }
+    .movement-row .name { font-size: 15px; }
+    .movement-track { height: 12px; background: #edf1ee; }
+    .movement-fill { height: 100%; background: var(--mint); }
+    .movement-fill.negative { background: var(--negative); }
+    .movement-row .amount { text-align: right; font-size: 15px; font-weight: 700; }
+    .position-commentary {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr .86fr;
+      gap: 18px;
+    }
+    .position-card {
+      min-height: 0;
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-faint);
+      border-radius: 3px;
+      padding: 17px 20px;
+      overflow: hidden;
+    }
+    .position-card.liability {
+      background: var(--mint-faint);
+      border-color: var(--mint-pale);
+    }
+    .position-card .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .position-card .label {
+      color: var(--mint-deep);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      line-height: 1.15;
+    }
+    .position-card.liability .label { color: var(--mint-deep); }
+    .position-card .value {
+      margin-top: 8px;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .position-card .fy25 {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .position-card .movement {
+      color: var(--mint-deep);
+      padding-top: 3px;
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .position-card p {
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.34;
+    }
+    section[data-slide="07 / 10"] .position-card p,
+    section[data-slide="07 / 10"] .position-card .commentary b {
+      color: var(--ink) !important;
+    }
+    .position-card p + p { margin-top: 10px; }
+
+    /* === SLIDE 8: CREDIT === */
+    .credit-layout {
+      height: 760px;
+      display: grid;
+      grid-template-rows: 340px 1fr;
+      gap: 18px;
+    }
+    .loan-breakdown-card {
+      height: 340px;
+      display: grid;
+      grid-template-columns: 330px 1.18fr .82fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .loan-breakdown-card .top {
+      margin-bottom: 0;
+      display: block;
+    }
+    .loan-breakdown-card .value { font-size: 48px; }
+    .loan-breakdown-card .movement {
+      margin-top: 26px;
+      text-align: left;
+      font-size: 28px;
+    }
+    .loan-breakdown-card .commentary {
+      margin-top: 0;
+      font-size: 17px;
+      line-height: 1.34;
+    }
+    .loan-breakdown-copy {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+    }
+    .loan-breakdown {
+      margin-top: 0;
+      display: grid;
+      gap: 8px;
+      align-content: stretch;
+    }
+    .loan-breakdown-row {
+      display: grid;
+      grid-template-columns: 230px 1fr 150px;
+      gap: 18px;
+      align-items: center;
+      min-height: 94px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .loan-breakdown-row:last-child { border-bottom: 0; }
+    .loan-breakdown-row .name {
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+    .loan-breakdown-row .loan-track { height: 18px; background: #edf1ee; }
+    .loan-breakdown-row .loan-fill { height: 100%; background: var(--mint); }
+    .loan-breakdown-row .loan-fill.negative { background: var(--negative); }
+    .loan-breakdown-row .amount {
+      text-align: right;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+    .loan-breakdown-row .amount span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .credit-matrix {
+      height: 402px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .credit-matrix .position-card {
+      min-height: 0;
+      padding: 17px 20px;
+    }
+    .position-card.decrease {
+      background: var(--mint-faint);
+      border-color: var(--mint-pale);
+    }
+    .position-card.decrease .label,
+    .position-card.decrease .movement { color: var(--mint-deep); }
+    .position-card.unfavourable {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .position-card.unfavourable .label,
+    .position-card.unfavourable .movement { color: var(--negative); }
+    .position-card.unfavourable[data-polarity="benefit"] .metric-value.positive { color: var(--negative); }
+    .credit-matrix .position-card .top { margin-bottom: 10px; }
+    .credit-matrix .position-card .value { font-size: 31px; }
+    .credit-matrix .position-card p { font-size: 14.5px; line-height: 1.31; }
+
+    /* === SLIDE 9: FUNDING === */
+    .funding-position {
+      height: 760px;
+      display: grid;
+      grid-template-rows: 128px 1fr;
+      gap: 18px;
+    }
+    .funding-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .funding-kpi {
+      min-height: 0;
+      padding: 17px 20px;
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-faint);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .funding-kpi.priority {
+      background: var(--mint-faint);
+      color: var(--ink);
+      border-color: var(--mint-pale);
+    }
+    .funding-kpi.unfavourable {
+      background: var(--negative-faint);
+      border-color: #f5ded9;
+    }
+    .funding-kpi.unfavourable .label,
+    .funding-kpi.unfavourable .movement {
+      color: var(--negative);
+    }
+    .funding-kpi .label {
+      color: var(--mint-deep);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      line-height: 1.15;
+    }
+    .funding-kpi .value {
+      margin-top: 8px;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .funding-kpi .fy25 {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .funding-kpi .note,
+    .funding-kpi .movement {
+      margin-top: 8px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .funding-kpi .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .funding-kpi .top .movement {
+      color: var(--mint-deep);
+      margin-top: 0;
+      padding-top: 3px;
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .funding-body {
+      display: grid;
+      grid-template-columns: .98fr 1.32fr;
+      gap: 18px;
+      min-height: 0;
+    }
+    .funding-panel {
+      min-height: 0;
+      padding: 20px;
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-faint);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .funding-panel h3 {
+      font-size: 22px;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+    }
+    .funding-panel .subline {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .funding-mix-chart {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .funding-donut {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--mint) 0 51%,
+          #78cdb8 51% 64%,
+          #9fd9cc 64% 75%,
+          #c9e6dd 75% 84%,
+          var(--ink) 84% 90%,
+          #72b5a5 90% 93%,
+          #aabbb5 93% 96%,
+          #ccd8d3 96% 98%,
+          #e2e9e6 98% 100%
+        );
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+    }
+    .funding-donut::after {
+      content: "";
+      position: absolute;
+      inset: 58px;
+      border-radius: 50%;
+      background: var(--mint-faint);
+      border: 1px solid var(--mint-pale);
+    }
+    .funding-donut-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      z-index: 1;
+      font-size: 14px;
+      line-height: 1.18;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .funding-donut-label strong {
+      display: block;
+      color: var(--mint-deep);
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -.04em;
+      text-transform: none;
+    }
+    .funding-legend {
+      display: grid;
+      gap: 7px;
+    }
+    .funding-legend-row {
+      display: grid;
+      grid-template-columns: 14px 1fr 42px;
+      gap: 10px;
+      align-items: center;
+      font-size: 14px;
+      line-height: 1.12;
+      font-weight: 700;
+    }
+    .funding-legend-row .swatch {
+      width: 14px;
+      height: 14px;
+      background: var(--mint);
+    }
+    .funding-legend-row .pct {
+      color: var(--mint-deep);
+      text-align: right;
+    }
+    .funding-comparison {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+    }
+    .funding-comparison h4 {
+      color: var(--mint-deep);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .funding-comparison .subline { margin-bottom: 12px; }
+    .funding-stack-row {
+      display: grid;
+      grid-template-columns: 58px 1fr 58px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .funding-stack {
+      display: flex;
+      height: 28px;
+      background: white;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .funding-stack span { height: 100%; }
+    .funding-stack-legend {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.15;
+    }
+    .funding-stack-legend span::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+      background: var(--legend-color, var(--mint));
+      vertical-align: -1px;
+    }
+    .funding-right {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 1fr 214px;
+      gap: 18px;
+    }
+    .liability-movement-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .liability-movement-row {
+      display: grid;
+      grid-template-columns: 210px 118px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .liability-movement-row:last-child { border-bottom: 0; }
+    .liability-movement-row .name {
+      font-size: 15px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+    .liability-movement-row .change {
+      color: var(--negative);
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 700;
+      text-align: right;
+    }
+    .liability-movement-row .comment {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      line-height: 1.25;
+    }
+    .funding-raised-table {
+      margin-top: 16px;
+      display: grid;
+      gap: 7px;
+    }
+    .funding-raised-row {
+      display: grid;
+      grid-template-columns: 1fr 92px 92px 92px;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 14px;
+      line-height: 1.15;
+    }
+    .funding-raised-row.header {
+      color: var(--mint-deep);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border-bottom: 1px solid var(--mint);
+      padding-bottom: 5px;
+    }
+    .funding-raised-row.total {
+      margin-top: 2px;
+      padding-top: 7px;
+      border-top: 1px solid var(--mint);
+      font-weight: 700;
+    }
+    .funding-raised-row span:not(:first-child) { text-align: right; }
+
+    /* === SLIDE 10: APPENDIX === */
+    .assessment-grid { height: 470px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .assessment-column {
+      height: 470px;
+      padding: 40px 42px;
+      display: flex;
+      flex-direction: column;
+    }
+    .assessment-column h3 { font-size: 30px; }
+    .assessment-column ul {
+      flex: 1;
+      margin: 20px 0 0;
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .assessment-column li { margin: 14px 0; font-size: 19px; line-height: 1.4; }
+    .method-row { height: 200px; margin-top: 20px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 24px; }
+    .method-row > * { height: 200px; display: flex; flex-direction: column; justify-content: center; }
+    .method-row > .insight-box p { margin: 0; }
+    .appendix-grid {
+      height: 668px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .appendix-card {
+      padding: 30px 34px;
+      border: 1px solid var(--mint-pale);
+      background: var(--mint-faint);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .appendix-card h3 {
+      font-size: 30px;
+      line-height: 1.08;
+    }
+    .appendix-card p {
+      margin-top: 14px;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.34;
+    }
+    .appendix-card .label {
+      margin-bottom: 16px;
+      font-size: 26px;
+      line-height: 1.1;
+      font-weight: 400;
+      color: var(--mint-deep);
+    }
+    .appendix-note {
+      height: 118px;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 24px 28px;
+      border-left: 5px solid var(--mint);
+      background: white;
+    }
+    .appendix-note p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.34;
+    }
+
+    /* === OUTSIDE-STAGE CONTROLS === */
+    .control-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      background: rgba(8,11,9,.30);
+      color: white;
+      box-shadow: 0 8px 26px rgba(0,0,0,.18);
+    }
+    .control-bar button {
+      width: 38px;
+      height: 34px;
+      border: 0;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+    .control-bar button:hover,
+    .control-bar button:focus-visible { background: var(--mint); color: var(--ink); }
+    .page-readout { min-width: 76px; text-align: center; font-size: 13px; letter-spacing: .08em; }
+    .progress-dots {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 8px;
+    }
+    .control-bar .progress-dot {
+      width: 11px;
+      height: 11px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(104, 113, 108, 0.70);
+      transition: background .2s var(--ease), transform .2s var(--ease);
+    }
+    .control-bar .progress-dot:hover,
+    .control-bar .progress-dot:focus-visible {
+      background: white;
+      transform: scale(1.25);
+    }
+    .control-bar .progress-dot.active {
+      background: var(--mint);
+      box-shadow: 0 0 0 2px rgba(16,196,151,.22);
+    }
+    @media (max-height: 600px) {
+      .control-bar {
+        bottom: 4px;
+        transform: translateX(-50%) scale(.55);
+        transform-origin: bottom center;
+      }
+    }
+
+    /* === EXPLORER DRAWER === */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(720px, 92vw);
+      z-index: 4000;
+      background: white;
+      border-left: 1px solid var(--rule);
+      box-shadow: -18px 0 50px rgba(0,0,0,.16);
+      transform: translateX(102%);
+      transition: transform .3s var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.open { transform: none; }
+    .drawer-header { padding: 24px 26px 18px; border-bottom: 1px solid var(--rule); }
+    .drawer-header-row { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+    .drawer h2 { font-size: 31px; letter-spacing: -.03em; }
+    .icon-button { border: 1px solid var(--ink); background: white; width: 36px; height: 36px; cursor: pointer; }
+    .drawer-controls { margin-top: 18px; display: grid; grid-template-columns: 1fr 190px; gap: 10px; }
+    .drawer-controls input,
+    .drawer-controls select { min-height: 42px; border: 1px solid #aab2ad; padding: 9px 11px; background: white; }
+    .drawer-note { margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.35; }
+    .explorer-columns {
+      display: grid;
+      grid-template-columns: minmax(170px,1fr) 100px 100px 100px;
+      gap: 12px;
+      padding: 12px 26px 10px;
+      border-bottom: 1px solid var(--rule);
+      background: white;
+      color: var(--mint-deep);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .explorer-columns span:not(:first-child) { text-align: right; }
+    .explorer-list { overflow: auto; padding: 0 26px 30px; }
+    .explorer-row { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+    .explorer-row summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: minmax(170px,1fr) 100px 100px 100px; gap: 12px; align-items: baseline; }
+    .explorer-row summary::-webkit-details-marker { display: none; }
+    .explorer-row .metric-label { font-weight: 700; font-size: 14px; }
+    .explorer-row .num { text-align: right; font-size: 13px; }
+    .explorer-row .detail { margin-top: 12px; padding: 12px; background: var(--mint-faint); font-size: 13px; line-height: 1.45; }
+
+    /* === EVIDENCE PANEL === */
+    .evidence-panel {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: min(900px, 92vw);
+      max-height: 82vh;
+      transform: translate(-50%, -48%) scale(.98);
+      z-index: 5200;
+      background: white;
+      border: 1px solid var(--ink);
+      box-shadow: 0 28px 90px rgba(0,0,0,.25);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .2s var(--ease);
+    }
+    .evidence-panel.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .evidence-head { padding: 22px 24px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    .evidence-head h2 { font-size: 29px; }
+    .evidence-body { overflow: auto; max-height: calc(82vh - 82px); padding: 8px 24px 26px; }
+    .evidence-item { padding: 17px 0; border-bottom: 1px solid var(--rule); }
+    .evidence-item:last-child { border-bottom: 0; }
+    .evidence-item .type { color: var(--mint-deep); font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .evidence-item h3 { margin-top: 6px; font-size: 20px; }
+    .evidence-item p { margin-top: 8px; color: var(--ink-soft); font-size: 14px; line-height: 1.45; }
+    .evidence-item dl { margin: 10px 0 0; display: grid; grid-template-columns: 105px 1fr; gap: 5px 12px; font-size: 13px; }
+    .evidence-item dt { color: var(--muted); }
+    .evidence-item dd { margin: 0; }
+    .scrim { position: fixed; inset: 0; z-index: 5000; background: rgba(4,7,5,.44); opacity: 0; visibility: hidden; pointer-events: none; transition: .2s; }
+    .scrim.open { opacity: 1; visibility: visible; pointer-events: auto; }
+
+    /* === CARD SOURCE POPOVER === */
+    .source-card { cursor: default; }
+    .card-source-popover {
+      position: absolute;
+      z-index: 80;
+      width: 370px;
+      padding: 18px 20px 16px;
+      background: rgba(4, 7, 5, 0.70);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 46px rgba(0,0,0,.26);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity .16s var(--ease), transform .16s var(--ease), visibility .16s;
+    }
+    .card-source-popover.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+    .card-source-popover .source-kicker { color: var(--mint); font-size: 11px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .card-source-popover h3 { margin: 6px 0 12px; font-size: 20px; line-height: 1.1; }
+    .card-source-popover dl { display: grid; grid-template-columns: 78px 1fr; gap: 6px 10px; margin: 0 0 15px; font-size: 12px; line-height: 1.3; }
+    .card-source-popover dt { color: rgba(255,255,255,.62); }
+    .card-source-popover dd { margin: 0; }
+    .source-evidence-button { border: 1px solid white; background: transparent; color: white; padding: 8px 10px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .source-evidence-button:hover { background: white; color: var(--ink); }
+
+    /* === SLIDE OVERVIEW === */
+    .overview {
+      position: fixed;
+      inset: 5vh 5vw;
+      z-index: 5100;
+      background: white;
+      border: 1px solid var(--ink);
+      box-shadow: 0 25px 80px rgba(0,0,0,.24);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .2s var(--ease);
+      padding: 26px;
+    }
+    .overview.open { opacity: 1; visibility: visible; pointer-events: auto; }
+    .overview-head { display: flex; justify-content: space-between; align-items: center; }
+    .overview-head h2 { font-size: 30px; }
+    .overview-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .overview-card { min-height: 150px; border: 1px solid var(--rule); background: white; text-align: left; padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
+    .overview-card:hover,
+    .overview-card:focus-visible { border-color: var(--mint); background: var(--mint-faint); }
+    .overview-card .n { color: var(--mint-deep); font-size: 13px; font-weight: 700; }
+    .overview-card .t { display: block; margin-top: 10px; font-size: 16px; line-height: 1.25; font-weight: 700; }
+
+    /* === EDIT MODE === */
+    .edit-hotzone { position: fixed; top: 0; left: 0; width: 72px; height: 72px; z-index: 6000; cursor: pointer; }
+    .edit-toggle,
+    .edit-reset {
+      position: fixed;
+      left: 18px;
+      top: 18px;
+      z-index: 6001;
+      opacity: 0;
+      pointer-events: none;
+      border: 1px solid var(--ink);
+      background: white;
+      padding: 10px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .edit-toggle.show,
+    .edit-toggle.active,
+    .edit-reset.show { opacity: 1; pointer-events: auto; }
+    .edit-reset { top: 18px; left: 122px; }
+    .editing .editable { outline: 2px dashed var(--mint); outline-offset: 4px; cursor: text; }
+    .edit-status {
+      position: fixed;
+      left: 18px;
+      top: 62px;
+      z-index: 6001;
+      display: none;
+      background: var(--ink);
+      color: white;
+      padding: 8px 11px;
+      font-size: 12px;
+    }
+    .editing .edit-status { display: block; }
+
+    /* === ACCESSIBILITY === */
+    :focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport" aria-live="polite">
+    <main class="deck-stage" id="deckStage">
+      <!-- === SLIDE 1: TITLE === -->
+      <section class="slide title-slide active visible" data-slide="01 / 10" data-title="Independent Financial Analysis of Macquarie Group FY2026 Annual Report">
+        <div class="title-stage">
+          <div class="title-rule"></div>
+          <h1 class="title-main reveal d1">Independent Financial Analysis <span>of Macquarie Group FY2026 Annual Report</span></h1>
+          <div class="title-author reveal d2">
+            <span>Max Liu</span>
+            <a href="https://au.linkedin.com/in/max-liu-ba628b31" target="_blank" rel="noopener noreferrer">LinkedIn: linkedin.com/in/max-liu-ba628b31</a>
+          </div>
+          <section class="title-question reveal d2">
+            <div class="label">Vibe-coding project · Important notice</div>
+            <p>This presentation was created through a vibe-coding workflow for exploratory purposes. It may contain errors or omissions and should not be relied on for investment decisions. Verify all information against Macquarie Group's audited FY2026 Annual Report and seek professional advice where appropriate.</p>
+          </section>
+        </div>
+      </section>
+
+      <!-- === SLIDE 2: KEY FINANCIAL METRICS === -->
+      <section class="slide" data-slide="02 / 10" data-title="FY2026 financial highlights">
+        <header class="slide-header">
+          <div><div class="kicker">Financial highlights</div><h2>FY2026 financial highlights</h2></div>
+        </header>
+        <div class="slide-body">
+          <div class="s2-dashboard">
+            <div class="s2-metric-groups">
+              <section class="s2-metric-group reveal d1">
+                <div class="s2-group-heading">Income statement</div>
+                <div class="s2-group-grid income">
+                  <article class="s2-highlight-card priority" data-card-metric="is_profit_ordinary"><div><div class="label">Net profit</div><div class="value metric-value" data-metric="is_profit_ordinary" data-view="fy26" data-format="m"></div></div><div class="sub">↑ <span class="metric-value" data-metric="is_profit_ordinary" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="is_net_operating_income"><div><div class="label">Net operating income</div><div class="value metric-value" data-metric="is_net_operating_income" data-view="fy26" data-format="m"></div></div><div class="sub">↑ <span class="metric-value" data-metric="is_net_operating_income" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                  <article class="s2-highlight-card expense unfavourable" data-card-metric="is_total_operating_expense"><div><div class="label">Operating expenses</div><div class="value metric-value" data-metric="is_total_operating_expense" data-view="fy26" data-format="mExpense"></div></div><div class="sub">↑ <span class="metric-value" data-metric="is_total_operating_expense" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                </div>
+              </section>
+              <section class="s2-metric-group reveal d2">
+                <div class="s2-group-heading">Balance sheet</div>
+                <div class="s2-group-grid balance">
+                  <article class="s2-highlight-card" data-card-metric="bs_total_assets"><div><div class="label">Total assets</div><div class="value metric-value" data-metric="bs_total_assets" data-view="fy26" data-format="bn1"></div></div><div class="sub">↑ <span class="metric-value" data-metric="bs_total_assets" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="bs_total_liabilities"><div><div class="label">Total liabilities</div><div class="value metric-value" data-metric="bs_total_liabilities" data-view="fy26" data-format="bnLiability1"></div></div><div class="sub">↑ <span class="metric-value" data-metric="bs_total_liabilities" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="bs_total_equity"><div><div class="label">Total equity</div><div class="value metric-value" data-metric="bs_total_equity" data-view="fy26" data-format="bn1"></div></div><div class="sub">↑ <span class="metric-value" data-metric="bs_total_equity" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                </div>
+              </section>
+              <section class="s2-metric-group reveal d3">
+                <div class="s2-group-heading">Other financial highlights</div>
+                <div class="s2-group-grid rest">
+                  <article class="s2-highlight-card" data-card-metric="is_basic_eps"><div><div class="label">Earnings per share</div><div class="value metric-value" data-metric="is_basic_eps" data-view="fy26" data-format="centsDollar2"></div></div><div class="sub">↑ <span class="metric-value" data-metric="is_basic_eps" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="highlight_return_on_equity"><div><div class="label">Return on equity</div><div class="value metric-value" data-metric="highlight_return_on_equity" data-view="fy26" data-format="pct1Plain"></div></div><div class="sub">↑ from <span class="metric-value" data-metric="highlight_return_on_equity" data-view="fy25" data-format="pct1Plain"></span> in prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="highlight_return_on_tangible_equity"><div><div class="label">Return on tangible equity</div><div class="value metric-value" data-metric="highlight_return_on_tangible_equity" data-view="fy26" data-format="pct1Plain"></div></div><div class="sub">↑ from <span class="metric-value" data-metric="highlight_return_on_tangible_equity" data-view="fy25" data-format="pct1Plain"></span> in prior year</div></article>
+                  <article class="s2-highlight-card" data-card-metric="highlight_dividends_per_share"><div><div class="label">Dividends per share</div><div class="value metric-value" data-metric="highlight_dividends_per_share" data-view="fy26" data-format="centsDollar2"></div></div><div class="sub">(35% franked) · ↑ <span class="metric-value" data-metric="highlight_dividends_per_share" data-view="changePct" data-format="pct0"></span></div></article>
+                  <article class="s2-highlight-card unfavourable" data-card-metric="note5_effective_tax_rate"><div><div class="label">Effective tax rate</div><div class="value metric-value" data-metric="note5_effective_tax_rate" data-view="fy26" data-format="pct1Plain"></div></div><div class="sub">↑ from <span class="metric-value" data-metric="note5_effective_tax_rate" data-view="fy25" data-format="pct1Plain"></span> in prior year</div></article>
+                  <article class="s2-highlight-card unfavourable" data-card-metric="highlight_assets_under_management"><div><div class="label">Assets under management</div><div class="value metric-value" data-metric="highlight_assets_under_management" data-view="fy26" data-format="bn1"></div></div><div class="sub negative">↓ <span class="metric-value" data-metric="highlight_assets_under_management" data-view="changePct" data-format="pct0"></span> on the prior year</div></article>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Annual Report financial highlights page 20; primary statement totals audited pages 171 and 173. Balance-sheet totals inserted after operating expenses for presentation flow.</span><button class="evidence-button" data-metrics="is_profit_ordinary,is_net_operating_income,is_total_operating_expense,bs_total_assets,bs_total_liabilities,bs_total_equity,is_basic_eps,highlight_return_on_equity,highlight_return_on_tangible_equity,highlight_dividends_per_share,note5_effective_tax_rate,highlight_assets_under_management">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 3: PROFIT BRIDGE === -->
+      <section class="slide" data-slide="03 / 10" data-title="Investment income was the largest positive movement">
+        <header class="slide-header"><div><div class="kicker">FY2025 to FY2026 profit bridge</div><h2 class="editable" data-edit-id="s3-title">Investment income was the largest positive movement</h2></div></header>
+        <div class="slide-body">
+          <div class="bridge-wrap reveal"><svg id="profitBridge" role="img" aria-label="Waterfall chart reconciling FY2025 to FY2026 net profit"></svg></div>
+          <div class="bridge-notes">
+            <article class="panel mint reveal d2"><div class="label">Positive movements</div><h3>Transactions and client activity</h3><p class="sub editable" data-edit-id="s3-pos">OnStream, infrastructure and technology exits, the MAM divestment, CGM hedging and trading, BFS balance growth and private credit.</p></article>
+            <article class="panel decrease reveal d3"><div class="label">Offsets</div><h3>Risk costs, other income and tax</h3><p class="sub editable" data-edit-id="s3-neg">Portfolio growth, macro uncertainty, specific counterparties, lower other operating income, higher employment costs and a higher tax charge.</p></article>
+            <article class="panel black net-profit-card reveal d4"><div class="label">Net profit</div><div class="big metric-value" data-metric="is_profit_ordinary" data-view="changeAbs" data-format="mChange"></div><p class="sub editable" data-edit-id="s3-net">The gain from income growth was partially absorbed by impairments, expenses and tax.</p></article>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited pages 171 and 176-181; Management commentary (Macquarie) pages 29-31. Bridge recomputed from full-precision ledger values.</span><button class="evidence-button" data-metrics="is_profit_ordinary,is_net_investment_income,is_net_interest_income,is_net_trading_income,is_fee_commission_income,is_share_associates_jv,is_credit_impairment,is_other_impairment,is_other_operating_income,is_total_operating_expense,is_income_tax,is_nci" data-claims="drv_investment_income,drv_net_interest_trading,drv_fees,drv_impairments,drv_employment_cost,drv_tax">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 4: SEGMENTS === -->
+      <section class="slide" data-slide="04 / 10" data-title="Operating-group profit growth was led by CGM and transaction gains">
+        <header class="slide-header"><div><div class="kicker">Segment contribution and concentration</div><h2 class="editable" data-edit-id="s4-title">Operating-group profit growth was led by CGM and transaction gains</h2></div></header>
+        <div class="slide-body">
+          <div class="segment-layout">
+            <div class="segment-chart reveal" id="segmentChart"></div>
+            <div class="driver-stack">
+              <div class="driver-card reveal d1"><strong>CGM</strong><p class="editable" data-edit-id="s4-cgm">Largest uplift: OnStream and Asset Finance gains, stronger gas, power and oil hedging, and North American supply-demand trading opportunities; partly offset by platform investment, brokerage costs and impairments.</p></div>
+              <div class="driver-card reveal d2"><strong>MAM</strong><p class="editable" data-edit-id="s4-mam">Profit rose on performance fees and gains from selling the North American and European Public Investments business; lower base fees and the absence of the prior-year Rotorcraft gain reduced the benefit.</p></div>
+              <div class="driver-card reveal d2"><strong>Macquarie Capital</strong><p class="editable" data-edit-id="s4-maccap">Growth came from infrastructure and technology equity exits, private-credit income, Americas and ANZ M&A fees, and Asian brokerage; impairments and associate/JV losses were offsets.</p></div>
+              <div class="driver-card reveal d3"><strong>BFS</strong><p class="editable" data-edit-id="s4-bfs">Higher average loan, deposit and platform balances lifted net interest and fee income, partly absorbed by margin pressure from portfolio mix and competition plus higher technology spend.</p></div>
+              <div class="driver-card reveal d4"><strong>Corporate</strong><p class="editable" data-edit-id="s4-corp">Wider net expense reflected higher profit share and tax, Green Investment impairments and the non-recurrence of prior realisations, partly offset by lower Green Investment platform spend.</p></div>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited Note 4, pages 186-187; Management commentary (Macquarie) pages 29-31.</span><button class="evidence-button" data-metrics="segment_mam_profit,segment_bfs_profit,segment_cgm_profit,segment_mac_cap_profit,segment_corporate_profit" data-claims="drv_mam,drv_bfs,drv_cgm,drv_cgm_offsets,drv_maccap,drv_maccap_offsets,drv_corporate">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 5: INCOME DRIVERS === -->
+      <section class="slide" data-slide="05 / 10" data-title="Net operating income rose as investment gains outweighed offsets">
+        <header class="slide-header"><div><div class="kicker">Net operating income analysis</div><h2 class="editable" data-edit-id="s5-title">Net operating income rose as investment gains outweighed offsets</h2></div></header>
+        <div class="slide-body">
+          <div class="income-review">
+            <article class="income-summary-card reveal">
+              <div><div class="label">Net operating income</div><div class="big metric-value" data-metric="is_net_operating_income" data-view="fy26" data-format="m"></div></div>
+              <div class="change"><span class="metric-value" data-metric="is_net_operating_income" data-view="changePct" data-format="pct1"></span><br><span class="micro">year on year</span></div>
+              <p class="editable" data-edit-id="s5-summary">Macquarie attributed the increase primarily to higher investment income, net interest and trading income, and fee and commission income, partly offset by lower other operating income and higher credit and other impairment charges.</p>
+            </article>
+            <div class="income-driver-grid">
+              <article class="income-card reveal d1">
+                <div class="income-top"><div><div class="label">Net interest and trading</div><div class="income-value metric-value" data-metric="is_net_interest_trading_income" data-view="fy26" data-format="m"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_net_interest_trading_income" data-view="fy25" data-format="m"></span></div></div><div class="movement positive"><span class="metric-value" data-metric="is_net_interest_trading_income" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-nit"><b>Largely driven by:</b> CGM hedging across Global Gas and Power and Global Oil, inventory management and trading in energy markets, BFS loan/deposit growth, MAM reinsurance and lower funding costs, and private-credit growth. <b>Offset:</b> lower BFS margins.</p>
+              </article>
+              <article class="income-card reveal d2">
+                <div class="income-top"><div><div class="label">Fee and commission income</div><div class="income-value metric-value" data-metric="is_fee_commission_income" data-view="fy26" data-format="m"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_fee_commission_income" data-view="fy25" data-format="m"></span></div></div><div class="movement positive"><span class="metric-value" data-metric="is_fee_commission_income" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-fees"><b>Largely driven by:</b> MAM performance fees, Macquarie Capital advisory and Asian brokerage, and CGM commodities structuring and Futures activity. <b>Offset:</b> lower MAM base fees after the divestment.</p>
+              </article>
+              <article class="income-card reveal d3">
+                <div class="income-top"><div><div class="label">Net investment income</div><div class="income-value metric-value" data-metric="is_net_investment_income" data-view="fy26" data-format="m"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_net_investment_income" data-view="fy25" data-format="m"></span></div></div><div class="movement positive"><span class="metric-value" data-metric="is_net_investment_income" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-invest"><b>Largely driven by:</b> the OnStream divestment in CGM, infrastructure and technology exits in Macquarie Capital, and MAM's public-investments divestment. <b>Offsets:</b> prior-year Rotorcraft and Green Investment realisations did not recur.</p>
+              </article>
+              <article class="income-card offset reveal d4">
+                <div class="income-top"><div><div class="label">Associates and joint ventures</div><div class="income-value metric-value" data-metric="is_share_associates_jv" data-view="fy26" data-format="m"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_share_associates_jv" data-view="fy25" data-format="m"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_share_associates_jv" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-associates"><b>Largely driven by:</b> lower equity-accounted income from MAM underlying-fund asset sales and higher Macquarie Capital net losses from investment portfolio composition and performance. <b>Offset:</b> MAM revaluation gains.</p>
+              </article>
+              <article class="income-card offset reveal d4">
+                <div class="income-top"><div><div class="label">Credit and other impairment charges</div><div class="income-value metric-value" data-metric="calc_credit_other_impairment_charges" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="calc_credit_other_impairment_charges" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="calc_credit_other_impairment_charges" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-impairments"><b>Largely driven by:</b> portfolio growth, macroeconomic uncertainty and specific counterparty charges; other impairments were driven by underperforming Macquarie Capital assets and Green Investments.</p>
+              </article>
+              <article class="income-card offset reveal d4">
+                <div class="income-top"><div><div class="label">Net other operating income / charges</div><div class="income-value metric-value" data-metric="is_other_operating_income" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 income <span class="metric-value" data-metric="is_other_operating_income" data-view="fy25" data-format="m"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_other_operating_income" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s5-other-op"><b>Largely driven by:</b> higher Green Investment impairments, no centrally held asset-sale gains, and non-recurring Rotorcraft-related income. <b>Offsets:</b> lower Green Investment platform expenditure and higher meters-sector contribution.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited pages 171 and 176-181; Management commentary (Macquarie) page 30. Combined impairment line is an analyst calculation from audited credit and other impairment charges.</span><button class="evidence-button" data-metrics="is_net_operating_income,is_net_interest_trading_income,is_fee_commission_income,is_net_investment_income,is_share_associates_jv,is_credit_impairment,is_other_impairment,calc_credit_other_impairment_charges,is_other_operating_income,note2_trading_commodities,note2_fee_performance,calc_performance_fee_share" data-claims="drv_net_interest_trading,drv_fees,drv_investment_income,drv_associates_jv,drv_impairments,drv_other_operating_income">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 6: COSTS, IMPAIRMENTS AND TAX === -->
+      <section class="slide" data-slide="06 / 10" data-title="Employment costs drove expenses higher">
+        <header class="slide-header"><div><div class="kicker">Operating expenses and tax</div><h2 class="editable" data-edit-id="s6-title">Employment costs drove expenses higher</h2></div></header>
+        <div class="slide-body">
+          <div class="expense-review">
+            <article class="expense-summary-card unfavourable reveal">
+              <div><div class="label">Total operating expenses</div><div class="big metric-value" data-metric="is_total_operating_expense" data-view="fy26" data-format="mExpense"></div></div>
+              <div class="change"><span class="metric-value" data-metric="is_total_operating_expense" data-view="changePct" data-format="pct0"></span><br><span class="micro">year on year</span></div>
+              <p class="editable" data-edit-id="s6-summary">Operating expenses increased primarily because employment expenses rose. Other operating expenses were lower after the MAM divested business was sold.</p>
+            </article>
+            <div class="expense-grid">
+              <article class="expense-card unfavourable reveal d1">
+                <div class="top"><div><div class="label">Employment expenses</div><div class="value metric-value" data-metric="is_employment_expense" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_employment_expense" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_employment_expense" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-employment"><b>Largely driven by:</b> higher performance-related profit share and wage inflation. Employment was the largest operating-expense category.</p>
+              </article>
+              <article class="expense-card unfavourable reveal d2">
+                <div class="top"><div><div class="label">Brokerage, commission and fee expenses</div><div class="value metric-value" data-metric="is_brokerage_expense" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_brokerage_expense" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_brokerage_expense" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-brokerage"><b>Largely driven by:</b> increased hedging and trading-related expenses across equities, foreign exchange, interest rates and credit in CGM.</p>
+              </article>
+              <article class="expense-card unfavourable reveal d3">
+                <div class="top"><div><div class="label">Non-salary technology expenses</div><div class="value metric-value" data-metric="is_technology_expense" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_technology_expense" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_technology_expense" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-technology"><b>Largely driven by:</b> technology initiatives focused on data and digitalisation to support business growth and scalable operations.</p>
+              </article>
+              <article class="expense-card reveal d4">
+                <div class="top"><div><div class="label">Other operating expenses</div><div class="value metric-value" data-metric="is_other_operating_expense" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_other_operating_expense" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement positive"><span class="metric-value" data-metric="is_other_operating_expense" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-other-opex"><b>Largely driven by:</b> lower expenses after the MAM divestment. <b>Partly offset by:</b> higher CGM platform investment, adjacent business opportunities and significant transaction-related costs.</p>
+              </article>
+            </div>
+            <section class="tax-section reveal d4">
+              <article class="expense-card unfavourable">
+                <div class="top"><div><div class="label">Income tax expense</div><div class="value metric-value" data-metric="is_income_tax" data-view="fy26" data-format="mExpense"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="is_income_tax" data-view="fy25" data-format="mExpense"></span></div></div><div class="movement negative"><span class="metric-value" data-metric="is_income_tax" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-tax-expense"><b>Largely driven by:</b> higher Group performance, with the effective tax rate also affected by geography and nature of earnings.</p>
+              </article>
+              <article class="expense-card unfavourable">
+                <div class="top"><div><div class="label">Effective tax rate</div><div class="value metric-value" data-metric="note5_effective_tax_rate" data-view="fy26" data-format="pct1Plain"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="note5_effective_tax_rate" data-view="fy25" data-format="pct1Plain"></span></div></div><div class="movement negative">higher<br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s6-effective-tax"><b>Largely driven by:</b> the performance of the Group and the geographical composition and nature of earnings.</p>
+              </article>
+            </section>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited pages 171 and 188; Management commentary (Macquarie) page 31.</span><button class="evidence-button" data-metrics="is_total_operating_expense,is_employment_expense,is_brokerage_expense,is_technology_expense,is_other_operating_expense,is_income_tax,note5_effective_tax_rate" data-claims="drv_employment_cost,drv_brokerage_fee_expense,drv_technology_cost,drv_other_operating_expense,drv_tax">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 7: BALANCE SHEET OVERVIEW === -->
+      <section class="slide long-title" data-slide="07 / 10" data-title="Assets and liabilities expanded through loans, deposits and derivatives">
+        <header class="slide-header"><div><div class="kicker">Statement of financial position</div><h2 class="editable" data-edit-id="s7-title">Assets and liabilities expanded through loans, deposits and derivatives</h2></div></header>
+        <div class="slide-body">
+          <div class="balance-position">
+            <div class="balance-layout">
+              <div class="movement-list reveal"><h3>Asset movements <span class="movement-total">Total assets <span class="metric-value" data-metric="bs_total_assets" data-view="changePct" data-format="pct0"></span></span></h3><div id="assetMovements"></div></div>
+              <div class="movement-list liability reveal d2" data-polarity="benefit"><h3>Liability movements <span class="movement-total">Total liabilities <span class="metric-value" data-metric="bs_total_liabilities" data-view="changePct" data-format="pct0"></span></span></h3><div id="liabilityMovements"></div></div>
+            </div>
+            <div class="position-commentary">
+              <article class="position-card reveal d3">
+                <div class="top"><div><div class="label">Total assets</div><div class="value metric-value" data-metric="bs_total_assets" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_total_assets" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_total_assets" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s7-assets"><b>Principal drivers:</b> loan assets increased from BFS home loans and CGM corporate, commercial and other lending; derivative assets rose with gas and power price volatility.</p>
+                <p class="commentary editable" data-edit-id="s7-assets-2"><b>Also contributing:</b> reverse repos from Treasury liquidity management and CGM trading, financial investments from larger high-quality liquid asset portfolios, and trading assets from listed equity securities in CGM.</p>
+              </article>
+              <article class="position-card liability reveal d4" data-polarity="benefit">
+                <div class="top"><div><div class="label">Total liabilities</div><div class="value metric-value" data-metric="bs_total_liabilities" data-view="fy26" data-format="bnLiability1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_total_liabilities" data-view="fy25" data-format="bnLiability1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_total_liabilities" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s7-liabilities"><b>Principal drivers:</b> deposits grew in BFS; derivative liabilities increased with derivative asset movements; issued debt and borrowings rose from commercial paper, certificates of deposit and Treasury borrowings.</p>
+                <p class="commentary editable" data-edit-id="s7-liabilities-2"><b>Also contributing:</b> higher margin and settlement balances, and increased short positions in listed equity securities in CGM.</p>
+              </article>
+              <article class="position-card reveal d4">
+                <div class="top"><div><div class="label">Total equity</div><div class="value metric-value" data-metric="bs_total_equity" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_total_equity" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_total_equity" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+                <p class="commentary editable" data-edit-id="s7-equity"><b>Increased by earnings:</b> current-year profit added to equity.</p>
+                <p class="commentary editable" data-edit-id="s7-equity-2"><b>Partly offset by:</b> dividend payments and a lower foreign-currency translation reserve, largely driven by Australian-dollar appreciation against the US dollar.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited page 173; Management commentary (Macquarie) page 32.</span><button class="evidence-button" data-metrics="bs_total_assets,bs_loan_assets,bs_derivative_assets,bs_reverse_repos,bs_financial_investments,bs_trading_assets,bs_total_liabilities,bs_deposits,bs_issued_debt_borrowings,bs_derivative_liabilities,bs_margin_settlement_liabilities,bs_trading_liabilities,bs_total_equity,note31_dividends_paid,note30_fx_translation_reserve" data-claims="drv_balance_loans,drv_balance_derivatives,drv_balance_liquidity_assets,drv_balance_deposits,drv_balance_wholesale_funding,drv_balance_margin_trading_liabilities,drv_equity">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 8: ASSET COMPOSITION AND CREDIT === -->
+      <section class="slide" data-slide="08 / 10" data-title="Home loans drove asset growth without a proportional rise in ECL">
+        <header class="slide-header"><div><div class="kicker">Note 7 loan assets and ECL evidence</div><h2 class="editable" data-edit-id="s8-title">Home loans drove asset growth without a proportional rise in ECL</h2></div></header>
+        <div class="slide-body">
+          <div class="credit-layout">
+            <article class="loan-breakdown-card position-card reveal">
+              <div class="top"><div><div class="label">Net loan assets</div><div class="value metric-value" data-metric="bs_loan_assets" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_loan_assets" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_loan_assets" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+              <div class="loan-breakdown" id="loanBreakdown"></div>
+              <div class="loan-breakdown-copy">
+                <p class="commentary editable" data-edit-id="s8-loan-summary"><b>Note 7 net carrying value:</b> net loan assets reconcile to gross loan assets of <span class="metric-value" data-metric="note7_loan_gross" data-view="fy26" data-format="bn1"></span> less ECL allowance of <span class="metric-value" data-metric="note7_loan_ecl" data-view="fy26" data-format="bnAbs"></span>.</p>
+                <p class="commentary editable" data-edit-id="s8-loan-driver"><b>Composition:</b> home loans represented the largest component. Corporate, commercial and other lending was second largest. Asset financing decreased year on year; Note 7 shows the movement, but the reviewed notes do not disclose a specific balance driver.</p>
+              </div>
+            </article>
+            <div class="credit-matrix">
+              <article class="position-card reveal"><div class="top"><div><div class="label">Gross credit exposure</div><div class="value metric-value" data-metric="note8_total_credit_exposure" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="note8_total_credit_exposure" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="note8_total_credit_exposure" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div><p>Note 8 ECL scope includes on-balance sheet assets and off-balance sheet commitments subject to AASB 9 impairment.</p></article>
+              <article class="position-card reveal d1" data-polarity="benefit"><div class="top"><div><div class="label">Total ECL</div><div class="value metric-value" data-metric="note8_total_ecl" data-view="fy26" data-format="bn2"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="note8_total_ecl" data-view="fy25" data-format="bn2"></span></div></div><div class="movement"><span class="metric-value" data-metric="note8_total_ecl" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div><p>ECL models use EAD, PD, LGD and forward-looking information; overlays were <span class="metric-value" data-metric="note8_management_overlays" data-view="fy26" data-format="m"></span>.</p></article>
+              <article class="position-card unfavourable reveal d2" data-polarity="benefit"><div class="top"><div><div class="label">ECL coverage</div><div class="value metric-value" data-metric="calc_total_ecl_coverage" data-view="fy26" data-format="pct3"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="calc_total_ecl_coverage" data-view="fy25" data-format="pct3"></span></div></div><div class="movement"><span class="metric-value" data-metric="calc_total_ecl_coverage" data-view="changeAbs" data-format="ppt2"></span><br><span class="micro">on prior year</span></div></div><p>Coverage decreased because gross credit exposure grew faster than total ECL.</p></article>
+              <article class="position-card unfavourable reveal d2"><div class="top"><div><div class="label">Stage II exposure</div><div class="value metric-value" data-metric="note8_stage2_exposure" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="note8_stage2_exposure" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="note8_stage2_exposure" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div><p>Stage II reflects significant credit-risk increase, but Note 33 warns it does not necessarily mean lower credit quality than Stage I.</p></article>
+              <article class="position-card reveal d3"><div class="top"><div><div class="label">Stage III exposure</div><div class="value metric-value" data-metric="note8_stage3_exposure" data-view="fy26" data-format="bn1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="note8_stage3_exposure" data-view="fy25" data-format="bn1"></span></div></div><div class="movement"><span class="metric-value" data-metric="note8_stage3_exposure" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div><p>Stage III is credit-impaired/default exposure; Note 8 generally defines default as unlikely-to-pay or 90+ days past due.</p></article>
+              <article class="position-card reveal d4"><div class="top"><div><div class="label">Home loans above 80% LTV</div><div class="value metric-value" data-metric="calc_high_ltv_share" data-view="fy26" data-format="pct1Plain"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="calc_high_ltv_share" data-view="fy25" data-format="pct1Plain"></span></div></div><div class="movement"><span class="metric-value" data-metric="calc_high_ltv_share" data-view="changeAbs" data-format="ppt1"></span><br><span class="micro">on prior year</span></div></div><p>Note 33 home-loan LTV uses loan carrying values and the most recent valuation of home-loan collateral.</p></article>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">Audited Note 7 page 192; Note 8 pages 193-197; Note 33 pages 230-231 and 241.</span><button class="evidence-button" data-metrics="bs_loan_assets,note7_home_loans,note7_corporate_loans,note7_asset_financing,note7_loan_gross,note7_loan_ecl,note8_total_credit_exposure,note8_total_ecl,note8_management_overlays,calc_total_ecl_coverage,note8_stage2_exposure,note8_stage3_exposure,calc_high_ltv_share" data-claims="drv_home_loans,drv_business_banking,drv_balance_loans,drv_impairments">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 9: FUNDING AND LIABILITY MOVEMENTS === -->
+      <section class="slide long-title" data-slide="09 / 10" data-title="Funding remained diversified as liabilities expanded">
+        <header class="slide-header"><div><div class="kicker">Funding position and liability movements</div><h2 class="editable" data-edit-id="s9-title">Funding remained diversified as liabilities expanded</h2></div></header>
+        <div class="slide-body">
+          <div class="funding-position">
+            <div class="funding-kpis" data-polarity="benefit">
+              <article class="funding-kpi priority reveal">
+                <div class="top"><div><div class="label">Weighted average maturity</div><div class="value"><span class="metric-value" data-metric="funding_wam_term_funding_gt1yr" data-view="fy26" data-format="decimal1"></span> years</div><div class="fy25">FY2025 <span class="metric-value" data-metric="funding_wam_term_funding_gt1yr" data-view="fy25" data-format="decimal1"></span> years</div></div><div class="movement"><span class="metric-value" data-metric="funding_wam_term_funding_gt1yr" data-view="changeAbs" data-format="yearsChange"></span><br><span class="micro">on prior year</span></div></div>
+              </article>
+              <article class="funding-kpi reveal d1">
+                <div class="top"><div><div class="label">Term funding raised</div><div class="value metric-value" data-metric="funding_raised_total" data-view="fy26" data-format="bnLiability1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="funding_raised_total" data-view="fy25" data-format="bnLiability1"></span></div></div><div class="movement"><span class="metric-value" data-metric="funding_raised_total" data-view="changePct" data-format="pct1"></span><br><span class="micro">on prior year</span></div></div>
+              </article>
+              <article class="funding-kpi reveal d2">
+                <div class="top"><div><div class="label">Deposits</div><div class="value metric-value" data-metric="bs_deposits" data-view="fy26" data-format="bnLiability1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_deposits" data-view="fy25" data-format="bnLiability1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_deposits" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+              </article>
+              <article class="funding-kpi reveal d3">
+                <div class="top"><div><div class="label">Issued debt and borrowings</div><div class="value metric-value" data-metric="bs_issued_debt_borrowings" data-view="fy26" data-format="bnLiability1"></div><div class="fy25">FY2025 <span class="metric-value" data-metric="bs_issued_debt_borrowings" data-view="fy25" data-format="bnLiability1"></span></div></div><div class="movement"><span class="metric-value" data-metric="bs_issued_debt_borrowings" data-view="changePct" data-format="pct0"></span><br><span class="micro">on prior year</span></div></div>
+              </article>
+            </div>
+            <div class="funding-body">
+              <article class="funding-panel reveal d1">
+                <h3>Diversity of funding sources</h3>
+                <div class="subline">Drawn funding sources maturing across all tenors.</div>
+                <div class="funding-mix-chart">
+                  <div class="funding-donut"><div class="funding-donut-label"><strong>51%</strong>Deposits</div></div>
+                  <div class="funding-legend">
+                    <div class="funding-legend-row"><span class="swatch" style="background: var(--mint)"></span><span>Deposits</span><span class="pct metric-value" data-metric="funding_mix_deposits" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #78cdb8"></span><span>Bonds</span><span class="pct metric-value" data-metric="funding_mix_bonds" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #9fd9cc"></span><span>Commercial paper / CDs</span><span class="pct metric-value" data-metric="funding_mix_cp_cds" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #c9e6dd"></span><span>Equity</span><span class="pct metric-value" data-metric="funding_mix_equity" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: var(--ink)"></span><span>Unsecured loans</span><span class="pct metric-value" data-metric="funding_mix_unsecured_loans" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #72b5a5"></span><span>Securitisation</span><span class="pct metric-value" data-metric="funding_mix_securitisation" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #aabbb5"></span><span>Subordinated debt</span><span class="pct metric-value" data-metric="funding_mix_subordinated_debt" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #ccd8d3"></span><span>Other secured funding</span><span class="pct metric-value" data-metric="funding_mix_other_secured" data-view="fy26" data-format="pct0Plain"></span></div>
+                    <div class="funding-legend-row"><span class="swatch" style="background: #e2e9e6"></span><span>Other / hybrids / structured notes</span><span class="pct metric-value" data-metric="funding_mix_other_hybrids_structured" data-view="fy26" data-format="pct0Plain"></span></div>
+                  </div>
+                </div>
+                <div class="funding-comparison">
+                  <h4>FY2025 to FY2026 funding-related balance mix</h4>
+                  <div id="fundingCompositionChange"></div>
+                </div>
+              </article>
+              <div class="funding-right">
+                <article class="funding-panel reveal d2">
+                  <h3>Material liability movements</h3>
+                  <div class="subline">Statement movements with Macquarie page 32 commentary.</div>
+                  <div class="liability-movement-list" data-polarity="benefit">
+                    <div class="liability-movement-row"><span class="name">Deposits</span><span class="change"><span class="metric-value" data-metric="bs_deposits" data-view="changeAbs" data-format="bnChange"></span></span><span class="comment">Grew in BFS; at-call balances were the largest deposit category.</span></div>
+                    <div class="liability-movement-row"><span class="name">Derivative liabilities</span><span class="change"><span class="metric-value" data-metric="bs_derivative_liabilities" data-view="changeAbs" data-format="bnChange"></span></span><span class="comment">Increased commensurate with derivative assets as market volatility moved derivative positions.</span></div>
+                    <div class="liability-movement-row"><span class="name">Issued debt and borrowings</span><span class="change"><span class="metric-value" data-metric="bs_issued_debt_borrowings" data-view="changeAbs" data-format="bnChange"></span></span><span class="comment">Driven by net issuance of commercial paper, certificates of deposit and Treasury borrowings.</span></div>
+                    <div class="liability-movement-row"><span class="name">Margin and settlement liabilities</span><span class="change"><span class="metric-value" data-metric="bs_margin_settlement_liabilities" data-view="changeAbs" data-format="bnChange"></span></span><span class="comment">Higher margin placed by financial institutions and broker settlement balances in CGM.</span></div>
+                    <div class="liability-movement-row"><span class="name">Trading liabilities</span><span class="change"><span class="metric-value" data-metric="bs_trading_liabilities" data-view="changeAbs" data-format="bnChange"></span></span><span class="comment">Increase in short positions on listed equity securities in CGM.</span></div>
+                  </div>
+                </article>
+                <article class="funding-panel reveal d3" data-card-metric="funding_raised_total">
+                  <h3>Term funding raised during FY2026</h3>
+                  <div class="funding-raised-table">
+                    <div class="funding-raised-row header"><span>Category</span><span>Bank</span><span>Non-bank</span><span>Total</span></div>
+                    <div class="funding-raised-row"><span>Issued paper</span><span class="metric-value" data-metric="funding_raised_issued_paper_bank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_issued_paper_nonbank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_issued_paper" data-view="fy26" data-format="bnLiability1"></span></div>
+                    <div class="funding-raised-row"><span>Loan facilities</span><span class="metric-value" data-metric="funding_raised_loan_facilities_bank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_loan_facilities_nonbank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_loan_facilities" data-view="fy26" data-format="bnLiability1"></span></div>
+                    <div class="funding-raised-row"><span>Secured funding</span><span class="metric-value" data-metric="funding_raised_secured_bank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_secured_nonbank" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_secured" data-view="fy26" data-format="bnLiability1"></span></div>
+                    <div class="funding-raised-row"><span>Loan capital</span><span class="metric-value" data-metric="funding_raised_loan_capital_bank" data-view="fy26" data-format="bnLiability1"></span><span>—</span><span class="metric-value" data-metric="funding_raised_loan_capital" data-view="fy26" data-format="bnLiability1"></span></div>
+                    <div class="funding-raised-row total"><span>Total</span><span class="metric-value" data-metric="funding_raised_bank_group" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_nonbank_group" data-view="fy26" data-format="bnLiability1"></span><span class="metric-value" data-metric="funding_raised_total" data-view="fy26" data-format="bnLiability1"></span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line">FY2026 Annual Report pages 32-33 and 173; Notes 13 and 17 pages 200-201. FY2025 funding KPI comparatives from FY2025 OFR page 31.</span><button class="evidence-button" data-metrics="funding_wam_term_funding_gt1yr,funding_raised_total,funding_raised_bank_group,funding_raised_nonbank_group,funding_raised_issued_paper,funding_raised_loan_facilities,funding_raised_secured,funding_raised_loan_capital,funding_mix_deposits,funding_mix_bonds,funding_mix_cp_cds,funding_mix_equity,funding_mix_unsecured_loans,bs_deposits,note13_deposits_at_call,note13_deposits_term,note13_deposits_offset,bs_derivative_liabilities,bs_issued_debt_borrowings,note17_issued_debt,note17_borrowings,bs_margin_settlement_liabilities,bs_trading_liabilities" data-claims="drv_funding_profile,drv_balance_deposits,drv_balance_wholesale_funding,drv_balance_derivatives,drv_balance_margin_trading_liabilities">Evidence</button></footer>
+      </section>
+
+      <!-- === SLIDE 10: APPENDIX === -->
+      <section class="slide" data-slide="10 / 10" data-title="Introduction to interactive capabilities">
+        <header class="slide-header"><div><div class="kicker">Appendix</div><h2 class="editable" data-edit-id="s10-title">Introduction to interactive capabilities</h2></div></header>
+        <div class="slide-body">
+          <div class="appendix-grid">
+            <article class="appendix-card reveal">
+              <div class="label">Navigation</div>
+              <h3>Move through the deck without leaving the page</h3>
+              <p class="editable" data-edit-id="s10-navigation">Use the <b>arrow buttons</b>, keyboard, touch gestures, or <b>bottom progress dots</b>. On slides 1–9, open <b>Tools</b> at the top right and choose <b>Overview</b> for direct access to any section.</p>
+            </article>
+            <article class="appendix-card reveal d1">
+              <div class="label">Explorer</div>
+              <h3>Search the financial ledger behind the slides</h3>
+              <p class="editable" data-edit-id="s10-explorer">Open <b>Tools → Explorer</b> to overlay the slide and search, filter, and compare FY2026 with FY2025 for the consolidated income statement, balance sheet, and selected note metrics.</p>
+            </article>
+            <article class="appendix-card reveal d2">
+              <div class="label">Evidence</div>
+              <h3>Drill into sources, formulas, units and classifications</h3>
+              <p class="editable" data-edit-id="s10-evidence">Open <b>Tools → Evidence</b> for full report-page, note, formula, rounding and classification detail. <b>Hovering any data card for 3 seconds</b> opens a concise source summary; select <b>View full evidence</b> for complete provenance.</p>
+            </article>
+            <article class="appendix-card reveal d3">
+              <div class="label">Controlled editing</div>
+              <h3>Edit wording while keeping values locked</h3>
+              <p class="editable" data-edit-id="s10-editing">For presentation preparers and reviewers, open <b>Tools → Review tools</b> on slides 1–9. Choose <b>Edit text</b> to adjust wording or add commentary when reviewing AI-generated insights; choose <b>Reset edits</b> to restore saved wording. Financial values, chart data, source mappings and calculations stay locked.</p>
+            </article>
+          </div>
+          <div class="appendix-note reveal d4">
+            <div class="label">Purpose of this format</div>
+            <p class="editable" data-edit-id="s10-purpose">This HTML format is intended to combine presentation flow with report-style auditability: the story remains slide-based, while the reader can inspect the data trail without switching documents.</p>
+          </div>
+        </div>
+        <footer class="slide-footer"><span class="source-line"></span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="control-bar" aria-label="Slide navigation">
+    <button id="prevSlide" aria-label="Previous slide">←</button>
+    <div class="page-readout" id="pageReadout">01 / 10</div>
+    <div class="progress-dots" id="progressDots" aria-label="Slide pages">
+      <button class="progress-dot" data-slide-index="0" aria-label="Go to slide 1"></button>
+      <button class="progress-dot" data-slide-index="1" aria-label="Go to slide 2"></button>
+      <button class="progress-dot" data-slide-index="2" aria-label="Go to slide 3"></button>
+      <button class="progress-dot" data-slide-index="3" aria-label="Go to slide 4"></button>
+      <button class="progress-dot" data-slide-index="4" aria-label="Go to slide 5"></button>
+      <button class="progress-dot" data-slide-index="5" aria-label="Go to slide 6"></button>
+      <button class="progress-dot" data-slide-index="6" aria-label="Go to slide 7"></button>
+      <button class="progress-dot" data-slide-index="7" aria-label="Go to slide 8"></button>
+      <button class="progress-dot" data-slide-index="8" aria-label="Go to slide 9"></button>
+      <button class="progress-dot" data-slide-index="9" aria-label="Go to slide 10"></button>
+    </div>
+    <button id="nextSlide" aria-label="Next slide">→</button>
+  </nav>
+
+  <!-- === EXPLORER DRAWER === -->
+  <aside class="drawer" id="explorerDrawer" aria-label="Financial data explorer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-header-row"><div><div class="kicker">Canonical ledger</div><h2>Financial data explorer</h2></div><button class="icon-button" id="explorerClose" aria-label="Close explorer">×</button></div>
+      <div class="drawer-controls">
+        <input id="explorerSearch" type="search" placeholder="Search metrics" aria-label="Search metrics">
+        <select id="explorerFilter" aria-label="Filter financial metrics">
+          <option value="all">All statements and notes</option>
+          <option value="income">Income statement</option>
+          <option value="balance">Balance sheet</option>
+          <option value="note">Material notes</option>
+        </select>
+      </div>
+      <p class="drawer-note">FY2026 and FY2025 consolidated income-statement, balance-sheet and material-note metrics. Cash-flow lines are intentionally excluded.</p>
+    </div>
+    <div class="explorer-columns" aria-hidden="true"><span>Financial statement line items</span><span>FY2026</span><span>FY2025</span><span>Movement</span></div>
+    <div class="explorer-list" id="explorerList"></div>
+  </aside>
+
+  <!-- === EVIDENCE DIALOG === -->
+  <aside class="card-source-popover" id="cardSourcePopover" role="dialog" aria-live="polite" aria-label="Financial metric source" aria-hidden="true">
+    <div id="cardSourceContent"></div>
+    <button class="source-evidence-button" id="cardSourceEvidence" type="button">View full evidence</button>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <section class="evidence-panel" id="evidencePanel" role="dialog" aria-modal="true" aria-labelledby="evidenceTitle">
+    <header class="evidence-head"><h2 id="evidenceTitle">Evidence</h2><button class="icon-button" id="evidenceClose" aria-label="Close evidence">×</button></header>
+    <div class="evidence-body" id="evidenceBody"></div>
+  </section>
+
+  <!-- === OVERVIEW DIALOG === -->
+  <section class="overview" id="overview" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+    <header class="overview-head"><h2 id="overviewTitle">Slide overview</h2><button class="icon-button" id="overviewClose" aria-label="Close overview">×</button></header>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </section>
+
+  <!-- === EDITING CONTROLS === -->
+  <div class="edit-hotzone" aria-hidden="true"></div>
+  <button class="edit-toggle" id="editToggle" title="Edit narrative text (E)">Edit text</button>
+  <button class="edit-reset" id="editReset" title="Reset this browser's narrative edits">Reset edits</button>
+  <div class="edit-status">Narrative editing on · financial values and sources are locked</div>
+
+  <!-- === EMBEDDED CANONICAL DATA === -->
+  <script src="data/ledger.js"></script>
+  <script src="data/commentary.js"></script>
+
+  <script>
+    /* === DATA INITIALISATION === */
+    const LEDGER = LEDGER_DATA;
+    const COMMENTARY = COMMENTARY_DATA;
+    const metrics = new Map(LEDGER.metrics.map(metric => [metric.id, metric]));
+    const claims = new Map(COMMENTARY.claims.map(claim => [claim.id, claim]));
+
+    const num = value => Number(value);
+    const comma = value => Math.round(value).toLocaleString('en-AU');
+    const sign = value => value > 0 ? '+' : value < 0 ? '-' : '';
+    function viewValue(metric, view) {
+      const a = num(metric.fy2026);
+      const b = metric.fy2025 == null ? null : num(metric.fy2025);
+      if (view === 'fy26') return a;
+      if (view === 'fy25') return b;
+      if (view === 'changeAbs') return b == null ? null : a - b;
+      if (view === 'changePct' || view === 'changePctAbs') return b == null || b === 0 ? null : (a / b - 1) * 100;
+      return a;
+    }
+    function format(value, format) {
+      if (value == null || Number.isNaN(value)) return '—';
+      const absolute = Math.abs(value);
+      if (format === 'm') return `A$${comma(value)}m`;
+      if (format === 'mAbs') return `A$${comma(absolute)}m`;
+      if (format === 'mExpense') return `(A$${comma(absolute)}m)`;
+      if (format === 'mChange') return `${sign(value)}A$${comma(absolute)}m`;
+      if (format === 'mChangeAbs') return `A$${comma(absolute)}m`;
+      if (format === 'centsDollar2') return `A$${(value / 100).toFixed(2)}`;
+      if (format === 'bn1') return `A$${(value / 1000).toFixed(1)}bn`;
+      if (format === 'bn2') return `A$${(value / 1000).toFixed(2)}bn`;
+      if (format === 'bn') return `A$${(value / 1000).toFixed(1)}bn`;
+      if (format === 'bnAbs') return `A$${(absolute / 1000).toFixed(1)}bn`;
+      if (format === 'bnChange') return `${sign(value)}A$${(absolute / 1000).toFixed(1)}bn`;
+      if (format === 'bnLiability1') return `A$${(absolute / 1000).toFixed(1)}bn`;
+      if (format === 'bnLiabilityChange') return `A$${(absolute / 1000).toFixed(1)}bn`;
+      if (format === 'pct0') return `${sign(value)}${absolute.toFixed(0)}%`;
+      if (format === 'pct1') return `${sign(value)}${absolute.toFixed(1)}%`;
+      if (format === 'pct0Plain') return `${absolute.toFixed(0)}%`;
+      if (format === 'pct1Plain') return `${absolute.toFixed(1)}%`;
+      if (format === 'pct2Plain') return `${absolute.toFixed(2)}%`;
+      if (format === 'ppt1') return `${sign(value)}${absolute.toFixed(1)}ppt`;
+      if (format === 'ppt2') return `${sign(value)}${absolute.toFixed(2)}ppt`;
+      if (format === 'pct3') return `${absolute.toFixed(3)}%`;
+      if (format === 'decimal1') return `${value.toFixed(1)}`;
+      if (format === 'yearsChange') return `${sign(value)}${absolute.toFixed(1)} years`;
+      return String(value);
+    }
+    function movementClass(metric, value, polarityOverride) {
+      if (!metric || value == null || Number.isNaN(value)) return '';
+      const polarity = polarityOverride || (LEDGER.presentation?.metric_polarity || {})[metric.id] || 'benefit';
+      const unfavourable = ['cost', 'liability', 'risk'].includes(polarity) ? value > 0 : value < 0;
+      return unfavourable ? 'negative' : 'positive';
+    }
+    function populateMetricValues() {
+      document.querySelectorAll('.metric-value[data-metric]').forEach(element => {
+        const metric = metrics.get(element.dataset.metric);
+        if (!metric) {
+          element.textContent = 'Missing metric';
+          element.classList.add('negative');
+          return;
+        }
+        const view = element.dataset.view || 'fy26';
+        let value = viewValue(metric, view);
+        if (view.startsWith('change') && value != null && !Number.isNaN(value)) {
+          const direction = movementClass(metric, value, element.closest('[data-polarity]')?.dataset.polarity);
+          element.classList.toggle('negative', direction === 'negative');
+          element.classList.toggle('positive', direction === 'positive');
+        }
+        if (element.dataset.view === 'changePctAbs') value = Math.abs(value);
+        element.textContent = format(value, element.dataset.format || '');
+      });
+    }
+
+    /* === CHARTS GENERATED FROM THE LEDGER === */
+    function renderProfitBridge() {
+      const svg = document.getElementById('profitBridge');
+      const steps = [
+        ['FY25 profit', 'is_profit_ordinary', 'start'],
+        ['Investment', 'is_net_investment_income', 'delta'],
+        ['Net interest', 'is_net_interest_income', 'delta'],
+        ['Trading', 'is_net_trading_income', 'delta'],
+        ['Fees', 'is_fee_commission_income', 'delta'],
+        ['Associates', 'is_share_associates_jv', 'delta'],
+        ['Credit imp.', 'is_credit_impairment', 'delta'],
+        ['Other imp.', 'is_other_impairment', 'delta'],
+        ['Other op.', 'is_other_operating_income', 'delta'],
+        ['Expenses', 'is_total_operating_expense', 'delta'],
+        ['Tax', 'is_income_tax', 'delta'],
+        ['NCI', 'is_nci', 'delta'],
+        ['FY26 profit', 'is_profit_ordinary', 'end']
+      ];
+      const start = num(metrics.get('is_profit_ordinary').fy2025);
+      const deltas = steps.slice(1, -1).map(([, id]) => num(metrics.get(id).fy2026) - num(metrics.get(id).fy2025));
+      const cumulative = [start];
+      deltas.forEach(delta => cumulative.push(cumulative[cumulative.length - 1] + delta));
+      const values = [...cumulative, num(metrics.get('is_profit_ordinary').fy2026)];
+      const min = Math.min(...values) - 500;
+      const max = Math.max(...values.filter(isFinite)) + 500;
+      const W = 1670, H = 330, plotTop = 24, plotBottom = 256;
+      const y = v => plotTop + (max - v) / (max - min) * (plotBottom - plotTop);
+      const gap = W / steps.length;
+      const barW = Math.min(72, gap * .62);
+      let current = start;
+      const parts = [`<line x1="0" y1="${y(start)}" x2="${W}" y2="${y(start)}" stroke="#d7ddd9" stroke-dasharray="5 6"/>`];
+      steps.forEach((step, i) => {
+        const [label, id, type] = step;
+        const x = gap * i + gap / 2 - barW / 2;
+        let top, bottom, valueLabel, fill;
+        if (type === 'start' || type === 'end') {
+          const val = type === 'start' ? start : num(metrics.get(id).fy2026);
+          top = y(val); bottom = y(min); valueLabel = `A$${comma(val)}m`; fill = '#080b09';
+        } else {
+          const delta = num(metrics.get(id).fy2026) - num(metrics.get(id).fy2025);
+          const next = current + delta;
+          top = y(Math.max(current, next)); bottom = y(Math.min(current, next));
+          valueLabel = `${sign(delta)}${comma(Math.abs(delta))}`;
+          fill = delta >= 0 ? '#00a67d' : '#b43a32';
+          if (i < steps.length - 2) parts.push(`<line x1="${x + barW}" y1="${y(next)}" x2="${x + gap}" y2="${y(next)}" stroke="#9ea7a1"/>`);
+          current = next;
+        }
+        const height = Math.max(3, bottom - top);
+        parts.push(`<rect x="${x}" y="${top}" width="${barW}" height="${height}" fill="${fill}"/>`);
+        parts.push(`<text x="${x + barW / 2}" y="${Math.max(15, top - 8)}" text-anchor="middle" font-size="13" font-weight="700" fill="${fill}">${valueLabel}</text>`);
+        const words = label.split(' ');
+        parts.push(`<text x="${x + barW / 2}" y="282" text-anchor="middle" font-size="12" fill="#58615b">${words.map((word, j) => `<tspan x="${x + barW / 2}" dy="${j === 0 ? 0 : 14}">${word}</tspan>`).join('')}</text>`);
+      });
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.innerHTML = parts.join('');
+    }
+    function renderSegmentChart() {
+      const rows = [
+        ['Commodities and Global Markets', 'segment_cgm_profit'],
+        ['Macquarie Asset Management', 'segment_mam_profit'],
+        ['Macquarie Capital', 'segment_mac_cap_profit'],
+        ['Banking and Financial Services', 'segment_bfs_profit'],
+        ['Corporate', 'segment_corporate_profit']
+      ];
+      const changes = rows.map(([, id]) => viewValue(metrics.get(id), 'changeAbs'));
+      const max = Math.max(...changes.map(Math.abs).filter(isFinite), 1);
+      document.getElementById('segmentChart').innerHTML =
+        `<div class="micro" style="margin-bottom:8px">Change in net profit contribution, FY2026 vs FY2025</div>` +
+        rows.map(([label, id], index) => {
+          const metric = metrics.get(id);
+          const change = changes[index];
+          return `<div class="segment-row"><div class="segment-name">${label}</div><div class="bar-track"><div class="bar-fill ${change < 0 ? 'negative' : ''}" style="width:${Math.abs(change) / max * 100}%"></div></div><div class="segment-value ${change < 0 ? 'negative' : 'positive'}"><strong>${format(change, 'mChange')}</strong><br><span class="micro">FY26 ${format(num(metric.fy2026), 'm')}</span></div></div>`;
+        }).join('');
+    }
+    function renderMovements(containerId, rows, className) {
+      const changes = rows.map(([, id]) => viewValue(metrics.get(id), 'changeAbs'));
+      const max = Math.max(...changes.map(Math.abs).filter(isFinite), 1);
+      document.getElementById(containerId).innerHTML = rows.map(([label, id], index) => {
+        const metric = metrics.get(id);
+        const change = changes[index];
+        const direction = movementClass(metric, change, className === 'liability' ? 'benefit' : undefined);
+        const amountFormat = className === 'liability' ? 'bnLiabilityChange' : 'bnChange';
+        return `<div class="movement-row"><div class="name">${label}</div><div class="movement-track"><div class="movement-fill ${direction}" style="width:${Math.abs(change) / max * 100}%"></div></div><div class="amount ${direction}">${format(change, amountFormat)}</div></div>`;
+      }).join('');
+    }
+    function renderLoanBreakdown() {
+      const rows = [
+        ['Home loans', 'note7_home_loans'],
+        ['Corporate, commercial and other lending', 'note7_corporate_loans'],
+        ['Asset financing', 'note7_asset_financing']
+      ];
+      const total = viewValue(metrics.get('bs_loan_assets'), 'fy26');
+      const max = Math.max(...rows.map(([, id]) => viewValue(metrics.get(id), 'fy26')).filter(isFinite), 1);
+      document.getElementById('loanBreakdown').innerHTML = rows.map(([label, id]) => {
+        const metric = metrics.get(id);
+        const value = viewValue(metric, 'fy26');
+        const change = viewValue(metric, 'changeAbs');
+        const share = total ? value / total * 100 : 0;
+        const direction = movementClass(metric, change);
+        const fillDirection = id === 'note7_asset_financing' ? 'positive' : direction;
+        return `<div class="loan-breakdown-row"><div class="name">${label}</div><div><div class="loan-track"><div class="loan-fill ${fillDirection}" style="width:${value / max * 100}%"></div></div><span class="micro">${share.toFixed(1)}% of net loan assets</span></div><div class="amount ${direction}">${format(value, 'bn1')}<br><span>${format(change, 'bnChange')}</span></div></div>`;
+      }).join('');
+    }
+    function renderFundingCompositionChange() {
+      const host = document.getElementById('fundingCompositionChange');
+      if (!host) return;
+      const colors = {
+        bs_deposits: 'var(--mint)',
+        bs_issued_debt_borrowings: '#78cdb8',
+        bs_loan_capital: 'var(--ink)',
+        bs_total_equity: '#c9e6dd'
+      };
+      const rows = [
+        { period: 'FY2025', view: 'fy25' },
+        { period: 'FY2026', view: 'fy26' }
+      ];
+      const parts = [
+        ['Deposits', 'bs_deposits'],
+        ['Issued debt', 'bs_issued_debt_borrowings'],
+        ['Loan capital', 'bs_loan_capital'],
+        ['Equity', 'bs_total_equity']
+      ];
+      const rowHtml = rows.map(row => {
+        const values = parts.map(([, id]) => viewValue(metrics.get(id), row.view));
+        const total = values.reduce((sum, value) => sum + value, 0);
+        const segments = parts.map(([label, id], index) => {
+          const share = total ? values[index] / total * 100 : 0;
+          return `<span title="${label} ${share.toFixed(1)}%" style="width:${share}%; background:${colors[id]}"></span>`;
+        }).join('');
+        return `<div class="funding-stack-row"><span>${row.period}</span><div class="funding-stack">${segments}</div><span>${format(total, 'bn1')}</span></div>`;
+      }).join('');
+      host.innerHTML = `${rowHtml}<div class="funding-stack-legend"><span style="--legend-color: var(--mint)">Deposits</span><span style="--legend-color: #78cdb8">Issued debt</span><span style="--legend-color: var(--ink)">Loan capital</span><span style="--legend-color: #c9e6dd">Equity</span></div>`;
+    }
+
+    /* === EVIDENCE AND EXPLORER === */
+    function isExpenseOrChargeMetric(metric) {
+      const text = `${metric.id} ${metric.label}`.toLowerCase();
+      return metric.group === 'income_statement' && /(expense|expenses|charge|charges|impairment|tax)/.test(text);
+    }
+    function formatMetricAmount(metric, value) {
+      if (metric.unit !== 'A$m') return value == null ? '—' : String(value);
+      if (isExpenseOrChargeMetric(metric) && Number(value) < 0) return format(value, 'mExpense');
+      return format(value, 'm');
+    }
+    function metricEvidence(metric) {
+      const source = metric.source || {};
+      return `<article class="evidence-item"><div class="type">${metric.type === 'reported' ? 'Audited reported fact' : 'Analyst calculation'}</div><h3>${metric.label}</h3><p>FY2026: ${formatMetricAmount(metric, num(metric.fy2026))}${metric.fy2025 == null ? '' : ` · FY2025: ${formatMetricAmount(metric, num(metric.fy2025))}`}</p><dl><dt>Metric ID</dt><dd>${metric.id}</dd><dt>Unit</dt><dd>${metric.unit}</dd>${metric.formula ? `<dt>Formula</dt><dd>${metric.formula}</dd>` : ''}<dt>Source</dt><dd>${source.note || 'Financial Report'}, report page ${source.report_page}${source.report_page_end ? `-${source.report_page_end}` : ''}</dd><dt>Rounding</dt><dd>Calculated at full precision; display rounding only</dd></dl></article>`;
+    }
+    function claimEvidence(claim) {
+      return `<article class="evidence-item"><div class="type">Macquarie management commentary</div><h3>${claim.topic}</h3><p>${claim.claim}</p><dl><dt>Claim ID</dt><dd>${claim.id}</dd><dt>Section</dt><dd>${claim.source_section}</dd><dt>Pages</dt><dd>${claim.report_pages.join(', ')}</dd><dt>Classification</dt><dd>${claim.classification}</dd></dl></article>`;
+    }
+    function openEvidence(metricIds = [], claimIds = []) {
+      const items = [
+        ...metricIds.map(id => metrics.get(id)).filter(Boolean).map(metricEvidence),
+        ...claimIds.map(id => claims.get(id)).filter(Boolean).map(claimEvidence)
+      ];
+      document.getElementById('evidenceBody').innerHTML = items.join('') || '<p style="padding:22px 0">No evidence mapped.</p>';
+      document.getElementById('scrim').classList.add('open');
+      const panel = document.getElementById('evidencePanel');
+      panel.classList.add('open');
+      document.getElementById('evidenceClose').focus();
+    }
+    function closeEvidence() {
+      document.getElementById('scrim').classList.remove('open');
+      document.getElementById('evidencePanel').classList.remove('open');
+    }
+    let activeSourceCard = null;
+    let sourceDwellTimer = null;
+    let sourceCloseTimer = null;
+    let lastSourcePointer = null;
+    function sourceSummary(metric) {
+      const source = metric.source || {};
+      const page = source.report_page == null ? 'Not mapped' : `${source.report_page}${source.report_page_end ? `-${source.report_page_end}` : ''}`;
+      return `<div class="source-kicker">${metric.type === 'reported' ? 'Audited reported fact' : 'Analyst calculation'}</div><h3>${metric.label}</h3><dl><dt>Source</dt><dd>${source.note || 'Financial Report'}</dd><dt>Report page</dt><dd>${page}</dd><dt>Unit</dt><dd>${metric.unit}</dd><dt>FY26 balance</dt><dd>${formatMetricAmount(metric, num(metric.fy2026))}</dd>${metric.fy2025 == null ? '' : `<dt>FY25 balance</dt><dd>${formatMetricAmount(metric, num(metric.fy2025))}</dd>`}</dl>`;
+    }
+    function clearSourceTimers() {
+      clearTimeout(sourceDwellTimer);
+      clearTimeout(sourceCloseTimer);
+    }
+    function closeCardSource() {
+      clearSourceTimers();
+      const popover = document.getElementById('cardSourcePopover');
+      popover.classList.remove('open');
+      popover.setAttribute('aria-hidden', 'true');
+      if (activeSourceCard) activeSourceCard.setAttribute('aria-expanded', 'false');
+      activeSourceCard = null;
+    }
+    function positionCardSource(card, pointer = null) {
+      const popover = document.getElementById('cardSourcePopover');
+      const stage = document.getElementById('deckStage');
+      const stageRect = stage.getBoundingClientRect();
+      const popoverWidth = popover.offsetWidth;
+      const popoverHeight = popover.offsetHeight;
+      const px = pointer ? pointer.clientX : card.getBoundingClientRect().left;
+      const py = pointer ? pointer.clientY : card.getBoundingClientRect().top;
+      const left = Math.max(stageRect.left, Math.min(px, stageRect.right - popoverWidth));
+      const top = Math.max(stageRect.top, Math.min(py, stageRect.bottom - popoverHeight));
+      popover.style.left = `${left}px`;
+      popover.style.top = `${top}px`;
+    }
+    function openCardSource(card) {
+      const metric = metrics.get(card.dataset.cardMetric);
+      if (!metric) return;
+      clearSourceTimers();
+      if (activeSourceCard && activeSourceCard !== card) activeSourceCard.setAttribute('aria-expanded', 'false');
+      activeSourceCard = card;
+      const popover = document.getElementById('cardSourcePopover');
+      document.getElementById('cardSourceContent').innerHTML = sourceSummary(metric);
+      document.getElementById('cardSourceEvidence').dataset.metricId = metric.id;
+      popover.classList.add('open');
+      popover.setAttribute('aria-hidden', 'false');
+      card.setAttribute('aria-expanded', 'true');
+      positionCardSource(card, lastSourcePointer);
+    }
+    function scheduleCardSourceClose() {
+      clearTimeout(sourceCloseTimer);
+      sourceCloseTimer = setTimeout(closeCardSource, 180);
+    }
+    function initialiseCardSources() {
+      const popover = document.getElementById('cardSourcePopover');
+      document.querySelectorAll('.slide article').forEach(card => {
+        const metricId = card.dataset.cardMetric || card.querySelector('.metric-value[data-metric]')?.dataset.metric;
+        if (!metricId || !metrics.has(metricId)) return;
+        card.dataset.cardMetric = metricId;
+        card.classList.add('source-card');
+        card.tabIndex = 0;
+        card.setAttribute('aria-haspopup', 'dialog');
+        card.setAttribute('aria-controls', 'cardSourcePopover');
+        card.setAttribute('aria-label', `Show source for ${metrics.get(metricId).label}`);
+        card.setAttribute('aria-expanded', 'false');
+        card.addEventListener('pointerenter', event => {
+          if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+          lastSourcePointer = { clientX: event.clientX, clientY: event.clientY };
+          clearTimeout(sourceCloseTimer);
+          sourceDwellTimer = setTimeout(() => openCardSource(card), 3000);
+        });
+        card.addEventListener('pointermove', event => {
+          if (event.pointerType !== 'mouse') return;
+          lastSourcePointer = { clientX: event.clientX, clientY: event.clientY };
+        });
+        card.addEventListener('pointerleave', () => {
+          clearTimeout(sourceDwellTimer);
+          scheduleCardSourceClose();
+        });
+        card.addEventListener('focusin', () => openCardSource(card));
+        card.addEventListener('focusout', event => {
+          if (!popover.contains(event.relatedTarget)) scheduleCardSourceClose();
+        });
+        card.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          openCardSource(card);
+          document.getElementById('cardSourceEvidence').focus();
+        });
+        card.addEventListener('pointerup', event => {
+          if (event.pointerType === 'touch') openCardSource(card);
+        });
+      });
+      popover.addEventListener('pointerenter', () => clearTimeout(sourceCloseTimer));
+      popover.addEventListener('pointerleave', scheduleCardSourceClose);
+      popover.addEventListener('focusin', () => clearTimeout(sourceCloseTimer));
+      popover.addEventListener('focusout', event => {
+        if (!activeSourceCard?.contains(event.relatedTarget)) scheduleCardSourceClose();
+      });
+      document.getElementById('cardSourceEvidence').addEventListener('click', () => {
+        const metricId = document.getElementById('cardSourceEvidence').dataset.metricId;
+        closeCardSource();
+        if (metricId) openEvidence([metricId]);
+      });
+      document.addEventListener('pointerdown', event => {
+        if (activeSourceCard && !activeSourceCard.contains(event.target) && !popover.contains(event.target)) closeCardSource();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape' || !activeSourceCard) return;
+        const sourceCard = activeSourceCard;
+        closeCardSource();
+        sourceCard.focus();
+      });
+    }
+    const explorerMetrics = LEDGER.metrics.filter(metric =>
+      metric.explorer &&
+      !metric.id.startsWith('cf_') &&
+      ['income_statement', 'balance_sheet', 'note'].includes(metric.group)
+    );
+    function explorerCategory(metric) {
+      if (metric.group === 'income_statement') return 'income';
+      if (metric.group === 'balance_sheet') return 'balance';
+      return 'note';
+    }
+    function renderExplorer() {
+      const query = document.getElementById('explorerSearch').value.trim().toLowerCase();
+      const filter = document.getElementById('explorerFilter').value;
+      const filtered = explorerMetrics.filter(metric =>
+        (filter === 'all' || explorerCategory(metric) === filter) &&
+        (!query || `${metric.label} ${metric.id} ${metric.section}`.toLowerCase().includes(query))
+      );
+      document.getElementById('explorerList').innerHTML = filtered.map(metric => {
+        const a = num(metric.fy2026), b = metric.fy2025 == null ? null : num(metric.fy2025);
+        const abs = b == null ? null : a - b;
+        const pct = b == null || b === 0 ? null : (a / b - 1) * 100;
+        const source = metric.source || {};
+        const val = value => formatMetricAmount(metric, value);
+        const direction = movementClass(metric, abs);
+        return `<details class="explorer-row"><summary><span class="metric-label">${metric.label}</span><span class="num">${val(a)}</span><span class="num">${val(b)}</span><span class="num ${direction}">${abs == null ? '—' : metric.unit === 'A$m' ? format(abs, 'mChange') : format(pct, 'pct1')}</span></summary><div class="detail"><strong>${metric.id}</strong><br>FY2026 / FY2025 · ${metric.unit}<br>Absolute change: ${abs == null ? '—' : metric.unit === 'A$m' ? format(abs, 'mChange') : String(abs)} · Percentage change: ${pct == null ? '—' : format(pct, 'pct1')}<br>Source: ${source.note || 'Financial Report'}, page ${source.report_page}${source.report_page_end ? `-${source.report_page_end}` : ''}</div></details>`;
+      }).join('') || '<p style="padding:24px 0">No matching metrics.</p>';
+    }
+
+    /* === SLIDE PRESENTATION CONTROLLER === */
+    class SlidePresentation {
+      constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.stage = document.getElementById('deckStage');
+        this.current = 0;
+        this.wheelLocked = false;
+        this.touchStart = null;
+        this.scaleStage();
+        this.buildOverview();
+        this.bind();
+        const hashIndex = Number(new URLSearchParams(location.hash.slice(1)).get('slide')) - 1;
+        this.show(Number.isFinite(hashIndex) && hashIndex >= 0 ? hashIndex : 0, false);
+      }
+      scaleStage() {
+        const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+        const x = (innerWidth - 1920 * scale) / 2;
+        const y = (innerHeight - 1080 * scale) / 2;
+        this.stage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      }
+      show(index, updateHash = true) {
+        closeCardSource();
+        closeSlideMenus();
+        this.current = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === this.current);
+          slide.classList.toggle('visible', i === this.current);
+          slide.setAttribute('aria-hidden', i === this.current ? 'false' : 'true');
+        });
+        document.getElementById('pageReadout').textContent = `${String(this.current + 1).padStart(2,'0')} / ${this.slides.length}`;
+        document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === this.current);
+          if (i === this.current) dot.setAttribute('aria-current', 'page');
+          else dot.removeAttribute('aria-current');
+        });
+        if (updateHash) history.replaceState(null, '', `#slide=${this.current + 1}`);
+      }
+      next() { this.show(this.current + 1); }
+      prev() { this.show(this.current - 1); }
+      buildOverview() {
+        document.getElementById('overviewGrid').innerHTML = this.slides.map((slide, index) => `<button class="overview-card" data-index="${index}"><span class="n">${String(index + 1).padStart(2,'0')}</span><span class="t">${slide.dataset.title}</span></button>`).join('');
+      }
+      bind() {
+        addEventListener('resize', () => this.scaleStage());
+        document.getElementById('nextSlide').addEventListener('click', () => this.next());
+        document.getElementById('prevSlide').addEventListener('click', () => this.prev());
+        document.getElementById('progressDots').addEventListener('click', event => {
+          const dot = event.target.closest('.progress-dot');
+          if (!dot) return;
+          this.show(Number(dot.dataset.slideIndex));
+        });
+        addEventListener('keydown', event => {
+          if (event.target.matches('input,select,button,[contenteditable="true"]')) return;
+          if (['ArrowRight','ArrowDown','PageDown',' '].includes(event.key)) { event.preventDefault(); this.next(); }
+          if (['ArrowLeft','ArrowUp','PageUp'].includes(event.key)) { event.preventDefault(); this.prev(); }
+          if (event.key === 'Home') this.show(0);
+          if (event.key === 'End') this.show(this.slides.length - 1);
+          if (event.key.toLowerCase() === 'o') toggleOverview(true);
+          if (event.key === 'Escape') { closeCardSource(); closeEvidence(); toggleOverview(false); closeExplorer(); }
+        });
+        addEventListener('wheel', event => {
+          if (this.wheelLocked || document.querySelector('.drawer.open,.evidence-panel.open,.overview.open')) return;
+          if (Math.abs(event.deltaY) < 25) return;
+          this.wheelLocked = true;
+          event.deltaY > 0 ? this.next() : this.prev();
+          setTimeout(() => this.wheelLocked = false, 450);
+        }, {passive:true});
+        addEventListener('touchstart', event => this.touchStart = event.touches[0].clientX, {passive:true});
+        addEventListener('touchend', event => {
+          if (this.touchStart == null) return;
+          const distance = event.changedTouches[0].clientX - this.touchStart;
+          if (Math.abs(distance) > 50) distance < 0 ? this.next() : this.prev();
+          this.touchStart = null;
+        }, {passive:true});
+        document.getElementById('overviewGrid').addEventListener('click', event => {
+          const card = event.target.closest('.overview-card');
+          if (!card) return;
+          this.show(Number(card.dataset.index));
+          toggleOverview(false);
+        });
+      }
+    }
+
+    /* === OVERLAYS AND CONTROLS === */
+    function openExplorer() {
+      document.getElementById('explorerDrawer').classList.add('open');
+      document.getElementById('explorerDrawer').setAttribute('aria-hidden','false');
+      document.querySelectorAll('.footer-explorer').forEach(b => b.setAttribute('aria-expanded','true'));
+      document.getElementById('explorerSearch').focus();
+    }
+    function closeExplorer() {
+      document.getElementById('explorerDrawer').classList.remove('open');
+      document.getElementById('explorerDrawer').setAttribute('aria-hidden','true');
+      document.querySelectorAll('.footer-explorer').forEach(b => b.setAttribute('aria-expanded','false'));
+    }
+    function toggleOverview(force) {
+      const overview = document.getElementById('overview');
+      const open = force == null ? !overview.classList.contains('open') : force;
+      overview.classList.toggle('open', open);
+      document.getElementById('scrim').classList.toggle('open', open);
+      if (open) document.getElementById('overviewClose').focus();
+    }
+    function closeSlideMenus(except = null, restoreFocus = false) {
+      document.querySelectorAll('.slide-menu.open').forEach(menu => {
+        if (menu === except) return;
+        menu.classList.remove('open');
+        const toggle = menu.querySelector('.slide-menu-toggle');
+        toggle.setAttribute('aria-expanded', 'false');
+        if (restoreFocus) toggle.focus();
+      });
+    }
+    function injectSlideMenus() {
+      document.querySelectorAll('.slide').forEach((slide, index) => {
+        if (index === 9) return;
+        slide.classList.add('has-slide-menu');
+        const menu = document.createElement('div');
+        menu.className = 'slide-menu';
+        const toggle = document.createElement('button');
+        toggle.className = 'slide-menu-toggle';
+        toggle.type = 'button';
+        toggle.textContent = 'Tools';
+        toggle.setAttribute('aria-haspopup', 'menu');
+        toggle.setAttribute('aria-expanded', 'false');
+        const page = document.createElement('span');
+        page.className = 'slide-menu-page';
+        page.textContent = slide.dataset.slide;
+        const panel = document.createElement('div');
+        panel.className = 'slide-menu-panel';
+        panel.id = `slideMenu${index + 1}`;
+        panel.setAttribute('role', 'menu');
+        toggle.setAttribute('aria-controls', panel.id);
+        const addMenuItem = (section, label, description, className = '') => {
+          const button = document.createElement('button');
+          button.className = `slide-menu-item ${className}`.trim();
+          button.type = 'button';
+          button.setAttribute('role', 'menuitem');
+          const title = document.createElement('span');
+          title.className = 'slide-menu-item-title';
+          title.textContent = label;
+          const detail = document.createElement('span');
+          detail.className = 'slide-menu-item-description';
+          detail.textContent = description;
+          button.append(title, detail);
+          section.appendChild(button);
+          return button;
+        };
+        const addSection = label => {
+          const section = document.createElement('div');
+          section.className = 'slide-menu-section';
+          const heading = document.createElement('div');
+          heading.className = 'slide-menu-section-label';
+          heading.textContent = label;
+          section.appendChild(heading);
+          panel.appendChild(section);
+          return section;
+        };
+        const exploreSection = addSection('Explore');
+        const overviewBtn = addMenuItem(exploreSection, 'Overview', 'Open the slide map');
+        overviewBtn.addEventListener('click', () => { closeSlideMenus(); toggleOverview(true); });
+        const explorerBtn = addMenuItem(exploreSection, 'Explorer', 'Search the financial ledger', 'footer-explorer');
+        explorerBtn.setAttribute('aria-controls', 'explorerDrawer');
+        explorerBtn.setAttribute('aria-expanded', 'false');
+        explorerBtn.addEventListener('click', () => { closeSlideMenus(); openExplorer(); });
+        const evidenceBtn = slide.querySelector('.evidence-button');
+        if (evidenceBtn) {
+          evidenceBtn.classList.add('slide-menu-item');
+          evidenceBtn.setAttribute('role', 'menuitem');
+          evidenceBtn.replaceChildren();
+          const title = document.createElement('span');
+          title.className = 'slide-menu-item-title';
+          title.textContent = 'Evidence';
+          const detail = document.createElement('span');
+          detail.className = 'slide-menu-item-description';
+          detail.textContent = 'Inspect sources and calculations';
+          evidenceBtn.append(title, detail);
+          evidenceBtn.addEventListener('click', () => closeSlideMenus());
+          exploreSection.appendChild(evidenceBtn);
+        }
+        const reviewSection = addSection('Review tools');
+        const editBtn = addMenuItem(reviewSection, 'Edit text', 'Adjust narrative wording only', 'menu-edit-action');
+        editBtn.addEventListener('click', () => { closeSlideMenus(); editor.toggleEditMode(); });
+        const resetBtn = addMenuItem(reviewSection, 'Reset edits', 'Restore this browser’s saved wording', 'menu-reset-action');
+        resetBtn.addEventListener('click', () => { closeSlideMenus(); editor.reset(); });
+        toggle.addEventListener('click', event => {
+          event.stopPropagation();
+          const opening = !menu.classList.contains('open');
+          closeSlideMenus(menu);
+          menu.classList.toggle('open', opening);
+          toggle.setAttribute('aria-expanded', String(opening));
+        });
+        toggle.addEventListener('keydown', event => {
+          if (event.key !== 'ArrowDown') return;
+          event.preventDefault();
+          closeSlideMenus(menu);
+          menu.classList.add('open');
+          toggle.setAttribute('aria-expanded', 'true');
+          panel.querySelector('button').focus();
+        });
+        panel.addEventListener('keydown', event => {
+          const items = [...panel.querySelectorAll('button')];
+          const current = items.indexOf(document.activeElement);
+          if (event.key === 'Escape') { event.preventDefault(); closeSlideMenus(null, true); return; }
+          if (!['ArrowDown', 'ArrowUp'].includes(event.key)) return;
+          event.preventDefault();
+          const direction = event.key === 'ArrowDown' ? 1 : -1;
+          items[(current + direction + items.length) % items.length].focus();
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(page);
+        menu.appendChild(panel);
+        slide.appendChild(menu);
+      });
+      document.addEventListener('click', event => {
+        if (!event.target.closest('.slide-menu')) closeSlideMenus();
+      });
+    }
+    document.getElementById('explorerClose').addEventListener('click', closeExplorer);
+    document.getElementById('overviewClose').addEventListener('click', () => toggleOverview(false));
+    document.getElementById('evidenceClose').addEventListener('click', closeEvidence);
+    document.getElementById('scrim').addEventListener('click', () => { closeEvidence(); toggleOverview(false); });
+    document.getElementById('explorerSearch').addEventListener('input', renderExplorer);
+    document.getElementById('explorerFilter').addEventListener('change', renderExplorer);
+    document.querySelectorAll('.evidence-button').forEach(button => button.addEventListener('click', () => openEvidence((button.dataset.metrics || '').split(',').filter(Boolean), (button.dataset.claims || '').split(',').filter(Boolean))));
+
+    /* === NARRATIVE-ONLY INLINE EDITING === */
+    class NarrativeEditor {
+      constructor() {
+        this.isActive = false;
+        this.elements = [...document.querySelectorAll('.editable[data-edit-id]')];
+        this.original = new Map(this.elements.map(element => [element.dataset.editId, element.innerHTML]));
+        this.restore();
+        this.elements.forEach(element => element.addEventListener('input', () => this.save()));
+      }
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.body.classList.toggle('editing', this.isActive);
+        document.getElementById('editToggle').classList.toggle('active', this.isActive);
+        document.getElementById('editToggle').textContent = this.isActive ? 'Finish editing' : 'Edit text';
+        this.elements.forEach(element => element.setAttribute('contenteditable', this.isActive ? 'true' : 'false'));
+        syncReviewToolLabels(this.isActive);
+      }
+      save() {
+        const data = Object.fromEntries(this.elements.map(element => [element.dataset.editId, element.innerHTML]));
+        localStorage.setItem('macquarie-fy26-narrative-edits', JSON.stringify(data));
+      }
+      restore() {
+        try {
+          const data = JSON.parse(localStorage.getItem('macquarie-fy26-narrative-edits') || '{}');
+          this.elements.forEach(element => {
+            if (!data[element.dataset.editId]) return;
+            if (element.querySelector('.metric-value')) {
+              const temp = document.createElement('div');
+              temp.innerHTML = data[element.dataset.editId];
+              element.textContent = temp.textContent;
+            } else {
+              element.innerHTML = data[element.dataset.editId];
+            }
+          });
+        } catch (_) {}
+      }
+      reset() {
+        if (!confirm('Reset all local narrative edits in this browser?')) return;
+        localStorage.removeItem('macquarie-fy26-narrative-edits');
+        this.elements.forEach(element => { element.innerHTML = this.original.get(element.dataset.editId); });
+      }
+    }
+    function syncReviewToolLabels(isEditing) {
+      document.querySelectorAll('.menu-edit-action').forEach(button => {
+        button.querySelector('.slide-menu-item-title').textContent = isEditing ? 'Finish editing' : 'Edit text';
+        button.querySelector('.slide-menu-item-description').textContent = isEditing ? 'Lock narrative wording' : 'Adjust narrative wording only';
+      });
+    }
+    const editor = new NarrativeEditor();
+    const hotzone = document.querySelector('.edit-hotzone');
+    const editToggle = document.getElementById('editToggle');
+    const editReset = document.getElementById('editReset');
+    let hideTimeout = null;
+    const showEditingControls = () => { clearTimeout(hideTimeout); editToggle.classList.add('show'); editReset.classList.add('show'); };
+    const hideEditingControls = () => { hideTimeout = setTimeout(() => { if (!editor.isActive) { editToggle.classList.remove('show'); editReset.classList.remove('show'); } }, 400); };
+    hotzone.addEventListener('mouseenter', showEditingControls);
+    hotzone.addEventListener('mouseleave', hideEditingControls);
+    editToggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    editToggle.addEventListener('mouseleave', hideEditingControls);
+    editReset.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    editReset.addEventListener('mouseleave', hideEditingControls);
+    hotzone.addEventListener('click', () => editor.toggleEditMode());
+    editToggle.addEventListener('click', () => editor.toggleEditMode());
+    editReset.addEventListener('click', () => editor.reset());
+    document.addEventListener('keydown', event => {
+      if (event.key === 'E' && event.shiftKey && !event.target.getAttribute('contenteditable') && !event.target.matches('input,select')) editor.toggleEditMode();
+    });
+
+    /* === APP START === */
+    populateMetricValues();
+    renderProfitBridge();
+    renderSegmentChart();
+    renderMovements('assetMovements', [
+      ['Loan assets','bs_loan_assets'],
+      ['Derivative assets','bs_derivative_assets'],
+      ['Reverse repos','bs_reverse_repos'],
+      ['Financial investments','bs_financial_investments'],
+      ['Trading assets','bs_trading_assets']
+    ], '');
+    renderMovements('liabilityMovements', [
+      ['Deposits','bs_deposits'],
+      ['Issued debt & borrowings','bs_issued_debt_borrowings'],
+      ['Derivative liabilities','bs_derivative_liabilities'],
+      ['Margin & settlement','bs_margin_settlement_liabilities'],
+      ['Trading liabilities','bs_trading_liabilities']
+    ], 'liability');
+    renderLoanBreakdown();
+    renderFundingCompositionChange();
+    renderExplorer();
+    injectSlideMenus();
+    initialiseCardSources();
+    const presentation = new SlidePresentation();
+  </script>
+</body>
+</html>
